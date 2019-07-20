@@ -1,0 +1,95 @@
+<resources>
+    <string name="app_name">拍档钱包</string>
+    <string name="exit_tips">再按一次退出程序</string>
+
+    <string name="btn_guide_create">创建身份</string>
+    <string name="btn_guide_recovery">恢复身份</string>
+
+    <string name="create_wallet_alert1">* 密码用于隐私保护和交易授权，强度非常重要</string>
+    <string name="create_wallet_alert2">* 登链钱包不存储密码秘钥，也无法帮您找回，请务必牢记</string>
+    <string name="create_wallet_name_hint">钱包名称</string>
+    <string name="create_wallet_pwd_hint">密码</string>
+    <string name="create_wallet_pwd_again_hint">重复密码</string>
+    <string name="create_wallet_pwd_reminder_info_hint">密码提示信息(可不填)</string>
+    <string name="wallet_manager_load_wallet">导入钱包</string>
+    <string name="create_wallet_agreement_reminder">我已经仔细阅读并同意</string>
+    <string name="create_wallet_agreement">服务及隐私条款</string>
+
+    <string name="create_wallet_name_repeat_tips">钱包名称重复</string>
+    <string name="create_wallet_name_input_tips">请输入钱包名称</string>
+    <string name="create_wallet_pwd_input_tips">密码不能为空</string>
+    <string name="create_wallet_pwdconfirm_input_tips">确认密码不能为空</string>
+    <string name="create_wallet_pwd_confirm_input_tips">密码不一致，请重新输入</string>
+
+    <string name="news_center_all_read">全部已读</string>
+
+    <string name="wallet_backup_tips1">最后一步：立即备份你的钱包！</string>
+    <string name="wallet_backup_tips2">备份钱包：导出「助记词」并抄写到安全的地方，千万不要保存到网络上，然后尝试转入、转出小额资产开始使用.</string>
+    <string name="wallet_backup_backup_btn">下一步</string>
+    <string name="wallet_backup_skip_btn">跳过</string>
+    <string name="wallet_backup_backup_help">查看备份详细教程</string>
+
+    <string name="mnemonic_backup_title">备份助记词</string>
+    <string name="mnemonic_backup_tips1">抄写下你的钱包助记词</string>
+    <string name="mnemonic_backup_tips2">助记词用于回复钱包或重置钱包密码，降它准确的抄写到纸上，并存放在只有你知道的安全的地方。</string>
+
+
+
+    <string name="mnemonic_backup_alert_tips">如果有人获取你的助记词将直接获取你的资产！请抄写下助记词并存放在安全的地方。</string>
+    <string name="mnemonic_backup_alert_btn">知道了</string>
+    <string name="mnemonic_backup_alert_title">请勿截图</string>
+
+    <string name="verify_backup_tip1">确认你的钱包助记词</string>
+    <string name="verify_backup_tip2">请按顺序点击助记词，以确认你的备份助记词正确。</string>
+    <string name="verify_backup_failed">备份失败，请检查你的助记词</string>
+
+    <string name="input_pwd_dialog_tip">请输入密码</string>
+    <string name="input_pwd_delete_tip">请慎重，此操作无法撤销</string>
+    <string name="input_pwd_dialog_confirm">确认</string>
+
+    <string name="homepage_tab_text_mall">钱包</string>
+    <string name="homepage_tab_text_mine">我</string>
+    <string name="mine_title">我</string>
+    <string name="property_drawer_qrcode_scanner">扫一扫</string>
+    <string name="property_drawer_create_wallet">创建钱包</string>
+
+
+    <string name="mine_wallet_manage">钱包管理</string>
+    <string name="mine_trade_record">交易记录</string>
+    <string name="mine_msg_center">消息中心</string>
+    <string name="mine_contracts">联系人</string>
+    <string name="mine_system_setting">系统设置</string>
+    <string name="mine_personal_center">个人中心</string>
+    <string name="mine_help_center">帮助与反馈</string>
+    <string name="mine_about_us">关于我们</string>
+
+    <string name="property_total_assets_cny">总资产(¥)</string>
+    <string name="property_total_assets_usd">总资产($)</string>
+    <string name="property_approximate">≈</string>
+
+    <string name="title_main_wallet">钱包</string>
+    <string name="identity_title">我的身份</string>
+
+    <string name="receipt">收款</string>
+    <string name="receipt_addr">收款地址</string>
+    <string name="copy_wallet">钱包地址已复制</string>
+
+    <string name="property_detail_title">ETC</string>
+    <string name="property_detail_transfer">转账</string>
+    <string name="property_detail_gathering">收款</string>
+
+    <string name="transfer_title_confirm">转账详情</string>
+    <string name="transfer_title">转账</string>
+    <string name="transfer_address">收款人钱包地址</string>
+    <string name="transfer_money">转账金额</string>
+    <string name="transfer_remark">备注</string>
+    <string name="transfer_gas_cost">矿工费用</string>
+    <string name="transfer_gas_price">自定义 Gas Price</string>
+    <string name="transfer_gas">自定义 Gas</string>
+    <string name="transfer_advanced_setting">高级选项</string>
+    <string name="transfer_hex_data">十六进制数据</string>
+    <string name="transfer_next">下一步</string>
+    <string name="transfer_gas_slow">慢</string>
+    <string name="transfer_gas_quick">快</string>
+    <string name="transfer_ether_unit">&#160;ether</string>
+</resources>

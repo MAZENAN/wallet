@@ -1,0 +1,38 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cn.part.wallet">
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:name=".WalletApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/applogo"
+        android:label="@string/app_name"
+        android:screenOrientation="portrait"
+        android:supportsRtl="true"
+        android:hardwareAccelerated="false"
+        android:largeHeap="true"
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".ui.activity.SplashActivity">
+
+        </activity>
+        <activity android:name=".ui.activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.activity.GuideActivity"/>
+        <activity android:name=".ui.activity.WalletAddActivity"/>
+        <activity android:name=".ui.activity.WalletBackUpActivity"/>
+        <activity android:name=".ui.activity.MnemonicBackupActivity"/>
+        <activity android:name=".ui.activity.VerifyMnemonicBackupActivity"/>
+        <activity android:name=".ui.activity.IdentityActivity"/>
+        <activity android:name=".ui.activity.WalletListActivity"/>
+        <activity android:name=".ui.activity.ReceiptActivity"/>
+        <activity android:name=".ui.activity.QRCodeScannerActivity"/>
+        <activity android:name=".ui.activity.ProperyDetailActivity"/>
+        <activity android:name=".ui.activity.TransferActivity"/>
+    </application>
+</manifest>
