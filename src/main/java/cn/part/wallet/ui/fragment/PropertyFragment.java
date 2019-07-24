@@ -139,6 +139,7 @@ public class PropertyFragment extends BaseFragment {
 
             intent.putExtra("wallet_id",currentWalletInfo.getId());
             intent.putExtra("token",token);
+            intent.putExtra("tokenNum",token.getTokenNum());
             startActivity(intent);
         });
     }
@@ -174,7 +175,7 @@ public class PropertyFragment extends BaseFragment {
         ImmersionBar.with(this).destroy();
     }
 
-    @OnClick({R.id.btn_add_property,R.id.btn_manage_wallet,R.id.tv_wallet_main_addr,R.id.switch_menu,R.id.iv_btn})
+    @OnClick({R.id.btn_manage_wallet,R.id.tv_wallet_main_addr,R.id.switch_menu,R.id.iv_btn})
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()){

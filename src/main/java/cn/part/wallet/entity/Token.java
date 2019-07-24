@@ -14,7 +14,7 @@ public class Token implements Parcelable {
 
     public Token(){}
 
-    public Token(String tokenName,BigDecimal tokenNum,BigDecimal tokenToCoin,String address,String contractaddress ) {
+    public Token(String tokenName,BigDecimal tokenNum,BigDecimal tokenToCoin,String address,String contractaddress) {
         this.tokenName = tokenName;
         this.tokenNum = tokenNum;
         this.tokenToCoin = tokenToCoin;
@@ -85,7 +85,6 @@ public class Token implements Parcelable {
             token.tokenToCoin = new BigDecimal(parcel.readString());
             token.address = parcel.readString();
             token.contractaddress = parcel.readString();
-
             return token;
         }
 

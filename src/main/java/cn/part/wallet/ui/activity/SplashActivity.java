@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.Window;
 import android.view.WindowManager;
 
+import org.consenlabs.tokencore.wallet.Identity;
 import org.consenlabs.tokencore.wallet.WalletManager;
 
 import java.io.File;
@@ -45,6 +46,7 @@ public class SplashActivity extends BaseActivity {
 
     private void chooseActivity() {
 //读取本地有无钱包，没有就跳转到guide，有就跳转到main
+
         MyThreadPool.runOnUiThreadDelayed(new Runnable() {
             @Override
             public void run() {

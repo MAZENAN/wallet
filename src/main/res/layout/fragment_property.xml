@@ -71,12 +71,12 @@
                 android:text="资产"
                 android:textStyle="bold"
                 android:id="@+id/tv_main_wallet__property"/>
-            <TextView
-                android:id="@+id/btn_add_property"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:drawableLeft="@drawable/selector_main_add_property"/>
+            <!--<TextView-->
+                <!--android:id="@+id/btn_add_property"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:drawableLeft="@drawable/selector_main_add_property"/>-->
         </RelativeLayout>
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefresh_property"

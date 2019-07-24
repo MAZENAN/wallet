@@ -32,6 +32,7 @@ public class IdentityViewModel extends AndroidViewModel {
         if (identity==null){
             identity = new MutableLiveData<>();
             Identity currentIdentity = Identity.getCurrentIdentity();
+
             Metadata metadata = currentIdentity.getMetadata();
             String name = metadata.getName();
             String ID = currentIdentity.getIdentifier();
@@ -40,6 +41,4 @@ public class IdentityViewModel extends AndroidViewModel {
         }
         return identity;
     }
-
-
 }

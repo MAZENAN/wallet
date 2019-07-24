@@ -6,7 +6,7 @@
     <string name="btn_guide_recovery">恢复身份</string>
 
     <string name="create_wallet_alert1">* 密码用于隐私保护和交易授权，强度非常重要</string>
-    <string name="create_wallet_alert2">* 登链钱包不存储密码秘钥，也无法帮您找回，请务必牢记</string>
+    <string name="create_wallet_alert2">* 钱包不存储密码秘钥，也无法帮您找回，请务必牢记</string>
     <string name="create_wallet_name_hint">钱包名称</string>
     <string name="create_wallet_pwd_hint">密码</string>
     <string name="create_wallet_pwd_again_hint">重复密码</string>
@@ -92,4 +92,23 @@
     <string name="transfer_gas_slow">慢</string>
     <string name="transfer_gas_quick">快</string>
     <string name="transfer_ether_unit">&#160;ether</string>
+
+
+    <string name="empty" />
+
+    <!-- Subtitles -->
+    <string name="subtitle_from">付款地址</string>
+    <string name="subtitle_to">收款地址</string>
+    <string name="subtitle_gas_fee">矿工费</string>
+    <string name="label_gas_limit">Gas Limit</string>
+    <string name="label_gas_price">Gas Price</string>
+    <string name="subtitle_transaction_num">交易号 #</string>
+    <string name="subtitle_transaction_time">交易时间</string>
+    <string name="subtitle_block_num">区块 #</string>
+    <string name="action_more_details">在区块浏览器中参看详细信息</string>
+
+    <string name="sent">转出</string>
+    <string name="create">创建合约</string>
+    <string name="received">转入</string>
+    <string name="btn_confirm">确认</string>
 </resources>

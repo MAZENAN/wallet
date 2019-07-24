@@ -28,6 +28,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     private CustomDialog dialog;//进度条
     private Unbinder unbinder;
 
+    protected final String TAG = getClass().getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

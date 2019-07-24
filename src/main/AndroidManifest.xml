@@ -34,5 +34,6 @@
         <activity android:name=".ui.activity.QRCodeScannerActivity"/>
         <activity android:name=".ui.activity.ProperyDetailActivity"/>
         <activity android:name=".ui.activity.TransferActivity"/>
+        <activity android:name=".ui.activity.TxDetailActivity"/>
     </application>
 </manifest>

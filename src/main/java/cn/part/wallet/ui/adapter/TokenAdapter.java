@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import cn.part.wallet.BuildConfig;
@@ -16,6 +17,8 @@ import cn.part.wallet.R;
 import cn.part.wallet.entity.Token;
 import cn.part.wallet.service.ITokenHttp;
 import cn.part.wallet.service.response.EthBalance;
+import cn.part.wallet.utils.Convert;
+import cn.part.wallet.utils.LogUtils;
 import cn.part.wallet.utils.RetrofitUtil;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -64,7 +67,10 @@ public class TokenAdapter extends RecyclerView.Adapter<TokenAdapter.TokenHolder>
         call.enqueue(new Callback<EthBalance>() {
             @Override
             public void onResponse(Call<EthBalance> call, Response<EthBalance> response) {
-                tokenHolder.tvTokenNum.setText(response.body().getResult());
+//                tokenHolder.tvTokenNum.setText(response.body().getResult());
+                BigDecimal yue = Convert.weiToEther(response.body().getResult());
+                tokenHolder.tvTokenNum.setText(yue.toString() + " eth");
+                LogUtils.e("trans","余额:"+response.body().getResult());
             }
 
             @Override
@@ -81,17 +87,12 @@ public class TokenAdapter extends RecyclerView.Adapter<TokenAdapter.TokenHolder>
     }
 
     static class TokenHolder extends ViewHolder {
-//        @BindView(R.id.token_name)
         TextView tvTokenName;
-       // @BindView(R.id.token_num)
         TextView tvTokenNum;
-       // @BindView(R.id.token_icon)
         ImageView imgIcon;
-       // @BindView(R.id.token_to_coin)
         TextView tvTokenToCoin;
         public TokenHolder(@NonNull View itemView) {
             super(itemView);
-//            ButterKnife.bind(itemView);
             tvTokenName = itemView.findViewById(R.id.token_name);
             tvTokenNum = itemView.findViewById(R.id.token_num);
             tvTokenToCoin = itemView.findViewById(R.id.token_to_coin);

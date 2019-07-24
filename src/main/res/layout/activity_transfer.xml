@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-
-<FrameLayout     xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,14 +11,11 @@
         android:focusableInTouchMode="true"
         android:gravity="center_horizontal"
         android:orientation="vertical">
-
         <include layout="@layout/common_toolbar" />
-
         <LinearLayout
             android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="21dp">
-
             <EditText
                 android:id="@+id/et_transfer_address"
                 android:layout_width="0dp"
@@ -33,12 +25,10 @@
                 android:textColor="@color/discovery_application_item_name_color"
                 android:hint="@string/transfer_address"
                 android:textSize="13sp" />
-
             <LinearLayout
                 android:id="@+id/lly_contacts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-
                 <ImageView
                     android:layout_width="17dp"
                     android:layout_height="17dp"
@@ -46,48 +36,41 @@
                     android:layout_marginStart="5dp"
                     android:src="@drawable/ic_transfer_contact" />
             </LinearLayout>
-
-
         </LinearLayout>
-
-
         <View
             android:layout_width="330dp"
             android:layout_height="0.75dp"
             android:layout_marginTop="10dp"
             android:background="@color/mine_menu_divider_color" />
-
         <EditText
-            android:id="@+id/send_amount"
+            android:id="@+id/et_amount"
             android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="21dp"
             android:background="@null"
+            android:inputType="numberDecimal"
             android:textColor="@color/discovery_application_item_name_color"
             android:hint="@string/transfer_money"
             android:textSize="13sp" />
-
         <View
             android:layout_width="330dp"
             android:layout_height="0.75dp"
             android:layout_marginTop="10dp"
             android:background="@color/mine_menu_divider_color" />
-
         <EditText
             android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="21dp"
+            android:id="@+id/et_remark"
             android:background="@null"
             android:hint="@string/transfer_remark"
             android:textColor="@color/discovery_application_item_name_color"
             android:textSize="13sp" />
-
         <View
             android:layout_width="330dp"
             android:layout_height="0.75dp"
             android:layout_marginTop="10dp"
             android:background="@color/mine_menu_divider_color" />
-
         <LinearLayout
             android:layout_marginTop="21dp"
             android:layout_width="330dp"
@@ -106,7 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="0.00021 ether"
+                android:text="0.00002100 ether"
                 android:textColor="@color/property_ico_worth_color"
                 android:textSize="12sp" />
 
@@ -119,20 +102,15 @@
             android:layout_marginTop="21dp"
             android:gravity="center_horizontal"
             android:orientation="vertical">
-
-
             <SeekBar
                 android:id="@+id/seekbar"
                 android:layout_width="330dp"
                 android:layout_height="24dp"
-                android:progress="10"
                 android:layout_marginTop="12dp" />
-
             <RelativeLayout
                 android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -140,16 +118,14 @@
                     android:text="@string/transfer_gas_slow"
                     android:textColor="@color/property_ico_worth_color"
                     android:textSize="12sp" />
-
                 <TextView
                     android:id="@+id/gas_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:textColor="@color/property_ico_worth_color"
-                    android:text="10gwei"
+                    android:text="1.0gwei"
                     android:textSize="12sp" />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -160,9 +136,7 @@
                     android:textColor="@color/property_ico_worth_color"
                     android:textSize="12sp" />
             </RelativeLayout>
-
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/lly_advance_param"
             android:layout_width="wrap_content"
@@ -173,12 +147,10 @@
             android:orientation="vertical"
             android:visibility="gone">
 
-
             <LinearLayout
                 android:layout_width="330dp"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
-
                 <EditText
                     android:id="@+id/custom_gas_price"
                     android:layout_width="300dp"
@@ -188,7 +160,6 @@
                     android:inputType="numberDecimal"
                     android:hint="@string/transfer_gas_price"
                     android:textSize="13sp" />
-
                 <TextView
                     android:layout_width="30dp"
                     android:layout_height="wrap_content"
@@ -197,21 +168,17 @@
                     android:text="gwei"
                     android:textSize="12sp" />
 
-
             </LinearLayout>
-
             <View
                 android:layout_width="330dp"
                 android:layout_height="0.75dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/mine_menu_divider_color" />
-
             <LinearLayout
                 android:layout_width="330dp"
                 android:layout_marginTop="21dp"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
-
                 <EditText
                     android:id="@+id/custom_gas_limit"
                     android:layout_width="300dp"
@@ -221,7 +188,6 @@
                     android:hint="@string/transfer_gas"
                     android:inputType="number"
                     android:textSize="13sp" />
-
                 <TextView
                     android:layout_width="30dp"
                     android:layout_height="wrap_content"
@@ -230,15 +196,12 @@
                     android:text="gas"
                     android:textSize="12sp" />
 
-
             </LinearLayout>
-
             <View
                 android:layout_width="330dp"
                 android:layout_height="0.75dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/mine_menu_divider_color" />
-
             <EditText
                 android:id="@+id/et_hex_data"
                 android:layout_width="330dp"
@@ -252,12 +215,10 @@
                 android:textSize="13sp" />
         </LinearLayout>
 
-
         <RelativeLayout
             android:layout_marginTop="21dp"
             android:layout_width="330dp"
             android:layout_height="wrap_content">
-
             <Switch
                 android:id="@+id/advanced_switch"
                 android:layout_width="wrap_content"
@@ -267,8 +228,6 @@
                 android:layout_centerVertical="true"
                 android:textOff="  "
                 android:textOn="  " />
-
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -279,13 +238,7 @@
                 android:textColor="@color/property_ico_worth_color"
                 android:textSize="12sp" />
         </RelativeLayout>
-
-
     </LinearLayout>
-
-
-
-
     <TextView
         android:id="@+id/btn_next"
         android:layout_width="330dp"
