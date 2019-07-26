@@ -4,56 +4,14 @@
     android:layout_height="match_parent"
     android:background="@color/mine_menu_divider_color"
     android:orientation="vertical">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="210dp"
-        android:background="@color/mine_bg">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textColor="@drawable/selector_identity_press"
-            android:textSize="18sp"
-            android:clickable="true"
-            android:id="@+id/tv_identity_name"
-            android:drawablePadding="@dimen/dp_4"
-            android:drawableTop="@drawable/selector_avator_press"/>
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/mine_menu_divider_color" />
+    <include layout="@layout/common_toolbar"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:id="@+id/wallet_manage">
-        <ImageView
-            android:layout_width="16dp"
-            android:layout_height="17dp"
-            android:layout_marginLeft="16dp"
-            android:src="@drawable/ic_mine_wallet" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:text="@string/mine_wallet_manage"
-            android:textColor="@color/mine_menu_text_color"
-            android:textSize="13sp" />
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/mine_menu_divider_color" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:id="@+id/address_manage">
+        android:layout_marginTop="@dimen/dp_20">
         <ImageView
             android:layout_width="16dp"
             android:layout_height="17dp"
@@ -64,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
-            android:text="@string/mine_address_manage"
+            android:text="@string/export_mnemonic"
             android:textColor="@color/mine_menu_text_color"
             android:textSize="13sp" />
     </LinearLayout>
@@ -73,7 +31,7 @@
         android:layout_height="10dp"
         android:background="@color/mine_menu_divider_color" />
     <LinearLayout
-        android:id="@+id/lly_system_setting"
+        android:id="@+id/ll_export_mnemonic"
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:background="@color/white"
@@ -90,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="11dp"
-            android:text="@string/mine_system_setting"
+            android:text="@string/export_mnemonic"
             android:textColor="@color/mine_menu_text_color"
             android:textSize="13sp" />
     </LinearLayout>
@@ -100,7 +58,7 @@
         android:layout_height="0.75dp"
         android:background="@color/mine_menu_divider_color" />
     <LinearLayout
-        android:id="@+id/ask_help"
+        android:id="@+id/ll_export_keystore"
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:background="@color/white"
@@ -117,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="11dp"
-            android:text="@string/mine_help_center"
+            android:text="@string/export_keystore"
             android:textColor="@color/mine_menu_text_color"
             android:textSize="13sp" />
     </LinearLayout>
@@ -132,19 +90,19 @@
         android:layout_height="46dp"
         android:background="@color/white"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
-
+        android:orientation="horizontal"
+        android:id="@+id/ll_export_privateKey">
         <ImageView
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:layout_marginLeft="16dp"
             android:src="@drawable/ic_mine_about_us" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="11dp"
-            android:text="@string/mine_about_us"
+            android:text="@string/export_privateKey"
+
             android:textColor="@color/mine_menu_text_color"
             android:textSize="13sp" />
     </LinearLayout>

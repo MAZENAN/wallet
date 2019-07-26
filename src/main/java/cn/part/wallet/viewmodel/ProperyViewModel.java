@@ -30,22 +30,16 @@ public class ProperyViewModel extends AndroidViewModel {
         if (wallet==null){
             wallet = new MutableLiveData<>();
 
-            SharedPreferences read = getApplication().getSharedPreferences("ids", MODE_PRIVATE);
+            SharedPreferences read = getApplication().getSharedPreferences("default_wallet", MODE_PRIVATE);
             if (null != read) {
-                String ethId = read.getString("EthId", "");
-                String btcId = read.getString("BtcId", "");
-                Wallet ethWallet = WalletManager.mustFindWalletById(ethId);
+                String wallet_id = read.getString("current_wallet_id", "");
+                Wallet cur_wallet = Identity.getCurrentIdentity().getWallets().get(0);
+//                Wallet cur_wallet = WalletManager.mustFindWalletById(wallet_id);
 
-                Wallet btcWallet = WalletManager.mustFindWalletById(btcId);
-                String btcAddress = btcWallet.getAddress();
-                String ethAddress = ethWallet.getAddress();
-                walletInfo = new WalletInfo(ethWallet.getMetadata().getName(),"0x" + ethAddress,"123",ethWallet.getId());
-                List<String> list = ethWallet.getMetadata().getBackup();
-                for (String str:list){
-                    Log.i("wallet_info",str);
-                }
-
-                wallet.setValue(walletInfo);
+                String ethAddress = cur_wallet.getAddress();
+                walletInfo = new WalletInfo(cur_wallet.getMetadata().getName(),"0x" + ethAddress,"123",cur_wallet.getId());
+                List<String> list = cur_wallet.getMetadata().getBackup();
+                this.wallet.setValue(walletInfo);
             }
         }
         return wallet;

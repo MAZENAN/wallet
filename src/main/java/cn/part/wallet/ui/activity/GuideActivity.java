@@ -40,7 +40,10 @@ public class GuideActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_create_identity:
-                    launchActivity(WalletAddActivity.class);
+                    launchActivity(IdentityAddActivity.class);
+                break;
+            case R.id.btn_recovery_identity:
+                launchActivity(IdentityRecoveryActivity.class);
                 break;
         }
     }

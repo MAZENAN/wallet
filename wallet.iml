@@ -155,6 +155,7 @@
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.9.0@jar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: javax.inject:javax.inject:1@jar" level="project" />
     <orderEntry type="library" name="Gradle: de.hdodenhof:circleimageview:2.1.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: org.litepal.android:java:3.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-vector-drawable:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.lcodecorex:tkrefreshlayout:1.0.7@aar" level="project" />
@@ -179,6 +180,7 @@
     <orderEntry type="library" name="Gradle: com.android.support:multidex:1.0.2@aar" level="project" />
     <orderEntry type="library" name="Gradle: org.bitcoinj:orchid:1.2.1@jar" level="project" />
     <orderEntry type="library" name="Gradle: org.bitcoinj:bitcoinj-core:0.14.3@jar" level="project" />
+    <orderEntry type="library" name="Gradle: org.litepal.android:core:3.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.jakewharton:butterknife-annotations:8.8.1@jar" level="project" />
     <orderEntry type="library" name="Gradle: net.jcip:jcip-annotations:1.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android:flexbox:1.0.0@aar" level="project" />

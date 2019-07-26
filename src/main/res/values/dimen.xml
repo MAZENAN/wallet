@@ -5,4 +5,5 @@
     <dimen name="small_margin">4dp</dimen>
     <dimen name="normal_margin">8dp</dimen>
     <dimen name="big_margin">16dp</dimen>
+    <dimen name="dp_150">150dp</dimen>
 </resources>

@@ -14,26 +14,54 @@
         android:hardwareAccelerated="false"
         android:largeHeap="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".ui.activity.SplashActivity">
-
-        </activity>
-        <activity android:name=".ui.activity.MainActivity">
+        <activity android:name=".ui.activity.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.GuideActivity"/>
-        <activity android:name=".ui.activity.WalletAddActivity"/>
-        <activity android:name=".ui.activity.WalletBackUpActivity"/>
-        <activity android:name=".ui.activity.MnemonicBackupActivity"/>
-        <activity android:name=".ui.activity.VerifyMnemonicBackupActivity"/>
-        <activity android:name=".ui.activity.IdentityActivity"/>
-        <activity android:name=".ui.activity.WalletListActivity"/>
-        <activity android:name=".ui.activity.ReceiptActivity"/>
-        <activity android:name=".ui.activity.QRCodeScannerActivity"/>
-        <activity android:name=".ui.activity.ProperyDetailActivity"/>
-        <activity android:name=".ui.activity.TransferActivity"/>
-        <activity android:name=".ui.activity.TxDetailActivity"/>
+        <activity android:name=".ui.activity.MainActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".ui.activity.GuideActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.IdentityAddActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.WalletBackUpActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.MnemonicBackupActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.VerifyMnemonicBackupActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.IdentityActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.WalletListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.ReceiptActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.QRCodeScannerActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.ProperyDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.TransferActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.TxDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.IdentityRecoveryActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.WalletAddChooseTypeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.WalletAddActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.WalletManageActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.WalletImportActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.AddressListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.AddressAddActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

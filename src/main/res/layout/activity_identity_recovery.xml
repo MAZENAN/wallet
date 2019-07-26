@@ -8,50 +8,32 @@
     <include layout="@layout/common_toolbar" />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_150"
+        android:layout_height="55dp"
+        android:background="@color/create_wallet_alert_bg"
         android:gravity="center_vertical"
         android:orientation="vertical">
-        <ImageView
-            android:layout_width="@dimen/dp_40"
-            android:layout_height="@dimen/dp_40"
-            android:layout_gravity="center"
-            android:id="@+id/img_wallet_icon"
-            android:src="@drawable/eth"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/create_wallet_alert2"
-            android:textColor="@color/text_black"
-            android:textSize="12sp"
-            android:id="@+id/tv_wallet_remind"
-            android:layout_gravity="center"/>
-
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:text="@string/recovery_identity_alert"
+            android:textColor="@color/white"
+            android:textSize="12sp"/>
     </LinearLayout>
-
     <EditText
-        android:id="@+id/et_wallet_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="21dp"
-        android:background="@null"
-        android:hint="@string/create_wallet_name_hint"
-        android:lines="1"
-        android:textColor="@color/base_text_color"
-        android:textSize="13sp" />
-
-    <View
+        android:id="@+id/et_mnemonic_name"
         android:layout_width="330dp"
-        android:layout_height="0.75dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:background="@color/mine_menu_divider_color" />
-
-
+        android:layout_height="85dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/etc_transfer_hex_data_et_shape"
+        android:gravity="start"
+        android:hint="@string/et_mnemonic_hint"
+        android:padding="10dp"
+        android:textSize="13sp"
+        android:layout_gravity="center"/>
     <EditText
-        android:id="@+id/et_wallet_pwd"
+        android:id="@+id/et_identity_pwd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -64,17 +46,15 @@
         android:inputType="textPassword"
         android:maxLength="16"
         android:textColor="@color/base_text_color"
-        android:textSize="13sp" />
-
+        android:textSize="13sp"/>
     <View
         android:layout_width="330dp"
         android:layout_height="0.75dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:background="@color/mine_menu_divider_color" />
-
+        android:background="@color/mine_menu_divider_color"/>
     <EditText
-        android:id="@+id/et_wallet_pwd_again"
+        android:id="@+id/et_identity_pwd_confirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -87,17 +67,15 @@
         android:inputType="textPassword"
         android:maxLength="16"
         android:textColor="@color/base_text_color"
-        android:textSize="13sp" />
-
+        android:textSize="13sp"/>
     <View
         android:layout_width="330dp"
         android:layout_height="0.75dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:background="@color/mine_menu_divider_color" />
-
+        android:background="@color/mine_menu_divider_color"/>
     <EditText
-        android:id="@+id/et_wallet_pwd_reminder_info"
+        android:id="@+id/et_identity_pwd_reminder_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -107,17 +85,15 @@
         android:background="@null"
         android:hint="@string/create_wallet_pwd_reminder_info_hint"
         android:textColor="@color/base_text_color"
-        android:textSize="13sp" />
-
+        android:textSize="13sp"/>
     <View
         android:layout_width="330dp"
         android:layout_height="0.75dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:background="@color/mine_menu_divider_color" />
-
+        android:background="@color/mine_menu_divider_color"/>
     <TextView
-        android:id="@+id/btn_create_wallet"
+        android:id="@+id/btn_recovery_identity"
         android:layout_width="match_parent"
         android:layout_height="43dp"
         android:layout_marginLeft="20dp"
@@ -126,6 +102,6 @@
         android:background="@drawable/create_wallet_btn_bg_selector"
         android:enabled="false"
         android:gravity="center"
-        android:text="@string/property_drawer_create_wallet"
-        android:textColor="@color/white" />
+        android:text="@string/btn_recovery_identity"
+        android:textColor="@color/white"/>
 </LinearLayout>

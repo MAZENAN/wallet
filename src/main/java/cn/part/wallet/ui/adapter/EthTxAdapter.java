@@ -71,14 +71,14 @@ public class EthTxAdapter extends RecyclerView.Adapter<EthTxAdapter.TxHolder> {
         this.listener = listener;
     }
 
-    public static class TxHolder extends RecyclerView.ViewHolder {
+     static class TxHolder extends RecyclerView.ViewHolder {
         ImageView imgIcon;
         TextView tvType;
         TextView tvAddress;
         TextView tvValue;
         RelativeLayout itemview;
 
-        public TxHolder(@NonNull View itemView) {
+         TxHolder(@NonNull View itemView) {
             super(itemView);
             imgIcon = itemView.findViewById(R.id.type_icon);
             tvType = itemView.findViewById(R.id.tv_type);

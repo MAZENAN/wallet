@@ -48,13 +48,14 @@
     <string name="input_pwd_dialog_confirm">确认</string>
 
     <string name="homepage_tab_text_mall">钱包</string>
-    <string name="homepage_tab_text_mine">我</string>
+    <string name="homepage_tab_text_mine">我的</string>
     <string name="mine_title">我</string>
     <string name="property_drawer_qrcode_scanner">扫一扫</string>
     <string name="property_drawer_create_wallet">创建钱包</string>
 
 
     <string name="mine_wallet_manage">钱包管理</string>
+    <string name="mine_address_manage">地址管理</string>
     <string name="mine_trade_record">交易记录</string>
     <string name="mine_msg_center">消息中心</string>
     <string name="mine_contracts">联系人</string>
@@ -111,4 +112,49 @@
     <string name="create">创建合约</string>
     <string name="received">转入</string>
     <string name="btn_confirm">确认</string>
+
+    <string name="recovery_identity_alert">使用助记词导入的同时可以修改钱包密码</string>
+    <string name="btn_recovery_identity">恢复身份</string>
+    <string name="et_mnemonic_hint">输入助记词用空格分隔</string>
+    <string name="recovery_mnemonic_input_tips">助记词不能为空</string>
+    <string name="recovery_identity_pwd_input_tips">密码不能为空</string>
+    <string name="recovery_identity_pwd_confirm_input_tips">确认密码不能为空</string>
+    <string name="recovery_identity_confirm_input_tips">密码不一致</string>
+
+    <string name="wallet_type_eth">ETH</string>
+    <string name="wallet_type_btc">BTC</string>
+    <string name="wallet_type_eos">EOS</string>
+
+    <string name="tv_wallet_op_add">创建</string>
+    <string name="tv_wallet_op_import">导入</string>
+    <string name="tv_cancle">取消</string>
+
+    <string name="export_mnemonic">导出助记词</string>
+    <string name="export_keystore">导出 Keystore</string>
+    <string name="export_privateKey">导出私钥</string>
+
+    <string name="import_wallet_by_keystore">复制粘贴keystore</string>
+    <string name="import_wallet_et_hint">Keystore文件内容</string>
+    <string name="begin_import">开始导入</string>
+    <string name="import_wallet_by_mnemonic_hint">输入助记词用空格分隔</string>
+    <string name="import_wallet_by_mnemonic_standard">输入助记词用空格分隔</string>
+    <string name="import_wallet_by_private_key_hint">输入名文私钥</string>
+    <string name="import_wallet_keystore_input_tips">请入如正确的keystore</string>
+    <string name="import_wallet_mnemonic_input_tips">请输入如正确的助记词</string>
+    <string name="import_wallet_private_input_tips">请输入如正确的私钥</string>
+    <string name="import_wallet_pwd_input_tips">请入密码</string>
+    <string name="import_wallet_pwd_confirm_input_tips">请入确认密码</string>
+    <string name="import_wallet_confirm_input_tips">密码不一致</string>
+
+    <string name="load_wallet_by_mnemonic_standard">m/44\'/60\'/0\'/0/0</string>
+    <string name="load_wallet_by_mnemonic_standard_ledger">m/44\'/60\'/0\'/0</string>
+    <string name="load_wallet_by_mnemonic_standard_custom">m/44\'/60\'/1\'/0/0</string>
+    <string name="load_wallet_by_mnemonic_standard_jaxx_option">m/44\'/60\'/0\'/0/0 Jaxx,Metamask(ETH)</string>
+    <string name="load_wallet_by_mnemonic_standard_ledger_option">m/44\'/60\'/0\'/0 Ledger (ETH)</string>
+    <string name="load_wallet_by_mnemonic_standard_custom_option">m/44\'/60\'/1\'/0/0 自定义路径</string>
+
+    <string name="address_add">添加地址</string>
+    <string name="address_add_name_hint">名称</string>
+    <string name="address_add_desc_hint">描述 (选填)</string>
+
 </resources>

@@ -1,19 +1,22 @@
 package cn.part.wallet.ui.adapter;
 
 
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.List;
 
-public class HomePagerAdapter extends FragmentPagerAdapter {
+public class TranListPagerAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> fragmentList;
+    private List<String> titleList;
 
-    public HomePagerAdapter(FragmentManager fm, List<Fragment> fragmentList) {
+    public TranListPagerAdapter(FragmentManager fm, List<Fragment> fragmentList,List<String> titleList) {
         super(fm);
         this.fragmentList = fragmentList;
+        this.titleList = titleList;
     }
 
     @Override
@@ -24,5 +27,11 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return fragmentList.size();
+    }
+
+    @Nullable
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return titleList.get(position);
     }
 }

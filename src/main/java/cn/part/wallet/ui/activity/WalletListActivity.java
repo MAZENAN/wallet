@@ -1,15 +1,20 @@
 package cn.part.wallet.ui.activity;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
+import org.consenlabs.tokencore.wallet.Identity;
+import org.consenlabs.tokencore.wallet.WalletManager;
+
 import butterknife.BindView;
+import butterknife.OnClick;
 import cn.part.wallet.R;
 import cn.part.wallet.base.BaseActivity;
 import cn.part.wallet.ui.adapter.WalletAdapter;
-import cn.part.wallet.viewmodel.WalletViewModel;
 
 public class WalletListActivity extends BaseActivity {
     @BindView(R.id.tv_title)
@@ -17,7 +22,6 @@ public class WalletListActivity extends BaseActivity {
     @BindView(R.id.rc_wallet_list)
     RecyclerView recyclerView;
     private WalletAdapter adapter;
-    private WalletViewModel viewModel;
     @Override
     protected void onBeforeSetContentLayout() {
 
@@ -35,8 +39,12 @@ public class WalletListActivity extends BaseActivity {
 
     @Override
     public void initDatas() {
-        viewModel = ViewModelProviders.of(this).get(WalletViewModel.class);
-        adapter = new WalletAdapter(viewModel.getWalletListLiveData().getValue());
+        adapter = new WalletAdapter(Identity.getCurrentIdentity().getWallets());
+        adapter.setListener((view,wallet)->{
+            Intent intent = new Intent(mContext,WalletManageActivity.class);
+            intent.putExtra("wallet_id",wallet.getId());
+            startActivity(intent);
+        });
     }
 
     @Override
@@ -45,5 +53,14 @@ public class WalletListActivity extends BaseActivity {
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
+    }
+
+    @OnClick(R.id.iv_btn)
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_btn:
+                launchActivity(WalletAddChooseTypeActivity.class);
+                break;
+        }
     }
 }

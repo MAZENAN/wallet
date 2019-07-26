@@ -24,11 +24,6 @@ import cn.part.wallet.utils.ToastUtil;
 import cn.part.wallet.view.NoScrollViewPager;
 
 
-/**
- * Created by Tiny 熊 @ Upchain.pro
- * 微信: xlbxiong
- */
-
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @BindView(R.id.vp_home)
@@ -75,8 +70,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         vpHome.setOffscreenPageLimit(2);
         List<Fragment> fragmentList = new ArrayList<>();
        fragmentList.add(new PropertyFragment());
-       // fragmentList.add(new DiscoveryFragment());
-//       fragmentList.add(new MineFragment());
        fragmentList.add(new MineFragment());
        homePagerAdapter = new HomePagerAdapter(getSupportFragmentManager(), fragmentList);
        vpHome.setAdapter(homePagerAdapter);
