@@ -143,16 +143,17 @@ public class ImportWalletByMnemonicFragment extends NoBarBaseFragment {
         //new Metadata(ChainType.ETHEREUM, Network.MAINNET, "name", "passwordHint")
         Metadata metadata = new Metadata();
         metadata.setChainType(walletType);
-        metadata.setNetwork(Network.MAINNET);
+        metadata.setNetwork(Network.TESTNET);
         metadata.setPasswordHint(pwdHint);
         metadata.setName("import-"+walletType);
         if (walletType.equals(ChainType.BITCOIN)){
 //            standard = BIP44Util.BITCOIN_MAINNET_PATH;//TODO 切换选择
 //            standard = BIP44Util.BITCOIN_SEGWIT_MAIN_PATH;//TODO 切换选择
-//            standard = BIP44Util.BITCOIN_TESTNET_PATH;//TODO 切换选择
-            standard = BIP44Util.BITCOIN_SEGWIT_TESTNET_PATH;//TODO 切换选择
+            standard = BIP44Util.BITCOIN_TESTNET_PATH;//TODO 切换选择
+//            standard = BIP44Util.BITCOIN_SEGWIT_TESTNET_PATH;//TODO 切换选择
         }
-        WalletManager.importWalletFromMnemonic(metadata,mnemonic,standard,pass,true);
+        Wallet wallet = WalletManager.importWalletFromMnemonic(metadata, mnemonic, standard, pass, true);
+        LogUtils.i("import",wallet.getAddress());
 
     }
 

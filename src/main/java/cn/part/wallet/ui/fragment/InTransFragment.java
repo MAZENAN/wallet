@@ -56,7 +56,7 @@ public class InTransFragment extends BaseFragment {
             address = bundle.getString(ARG_Address);
         }
         detailViewModel = ViewModelProviders.of(this).get(PropertyDetailViewModel.class);
-        detailViewModel.getEthTxList(address).observe(this,this::onTxListGet);
+//        detailViewModel.getEthTxList(address).observe(this,this::onTxListGet);
         detailViewModel.getLoadind().observe(this,this::onLoading);
     }
 
@@ -78,7 +78,7 @@ public class InTransFragment extends BaseFragment {
         mSwRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                detailViewModel.refreshTxList(address);
+                //detailViewModel.refreshTxList(address);
             }
         });
     }

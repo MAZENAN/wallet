@@ -4,33 +4,32 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
-
-import cn.part.wallet.service.repository.EthGasRepository;
-import cn.part.wallet.service.response.EthTxInfo;
-import cn.part.wallet.utils.LogUtils;
+import java.util.List;
+import cn.part.wallet.entity.Token;
+import cn.part.wallet.entity.TxInfo;
+import cn.part.wallet.service.repository.WalletRepository;
 
 public class PropertyDetailViewModel extends AndroidViewModel {
-    private MutableLiveData<EthTxInfo> ethTxList;
     private MutableLiveData<Boolean> loadind = new MutableLiveData<>();
+    private MutableLiveData<List<TxInfo>> mTxlistData;
+    private WalletRepository mWalletRepository;
 
-    private EthGasRepository ethGasRepository;
     public PropertyDetailViewModel(@NonNull Application application) {
         super(application);
-        ethGasRepository = EthGasRepository.getInstance();
+        mWalletRepository = WalletRepository.getInstance();
         loadind.setValue(false);
     }
 
-    public MutableLiveData<EthTxInfo> getEthTxList(String address) {
-        if (ethTxList==null) {
+    public MutableLiveData<List<TxInfo>> getETxList(Token token) {
+        if (mTxlistData==null) {
             setLoading(true);
-            ethTxList = ethGasRepository.getEthTx(address,EthGasRepository.TYPE_FIRST);
+            mTxlistData = mWalletRepository.getTxListData(token);
         }
-        return ethTxList;
+        return mTxlistData;
     }
 
-    public void refreshTxList(String address) {
-        LogUtils.i("txlist","获取列表");
-        ethGasRepository.reGetList(address,ethTxList);
+    public void refreshTxList(Token token) {
+        mWalletRepository.reGetTxList(mTxlistData,token);
     }
 
     public MutableLiveData<Boolean> getLoadind() {

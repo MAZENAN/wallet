@@ -47,6 +47,8 @@ public class Convert {
      */
     public static BigDecimal weiToEther(String wei) {
         BigDecimal ether = new BigDecimal(wei).divide(BigDecimal.valueOf(10).pow(18)).setScale(8,BigDecimal.ROUND_CEILING);
+        if (ether.compareTo(new BigDecimal("0"))==0)
+            ether = new BigDecimal("0");
         return ether;
     }
 

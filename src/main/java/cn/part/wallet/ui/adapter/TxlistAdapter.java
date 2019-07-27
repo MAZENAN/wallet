@@ -9,24 +9,24 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import cn.part.wallet.R;
 import cn.part.wallet.entity.TransInfo;
-import cn.part.wallet.service.response.EthTxInfo;
+import cn.part.wallet.entity.TxInfo;
 import cn.part.wallet.utils.Convert;
+import cn.part.wallet.utils.Util;
 
-public class EthTxAdapter extends RecyclerView.Adapter<EthTxAdapter.TxHolder> {
-    private List<TransInfo> list;
+public class TxlistAdapter extends RecyclerView.Adapter<TxlistAdapter.TxHolder> {
+    private List<TxInfo> list;
     private TxItemClickListener listener;
-    private String selefAddress;
 
-    public EthTxAdapter(List<TransInfo> list,String selefAddress) {
+    public TxlistAdapter(List<TxInfo> list) {
         this.list = list;
-        this.selefAddress = selefAddress;
     }
 
-    public void setList (List<TransInfo> list) {
+    public void setList (List<TxInfo> list) {
         this.list = list;
         notifyDataSetChanged();
     }
@@ -35,29 +35,24 @@ public class EthTxAdapter extends RecyclerView.Adapter<EthTxAdapter.TxHolder> {
     @Override
     public TxHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View viewTx = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item_transaction, viewGroup, false);
-        TxHolder holder = new TxHolder(viewTx);
-        return holder;
+        return new TxHolder(viewTx);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TxHolder txHolder, int i) {
-        TransInfo trans = list.get(i);
-
-        txHolder.tvValue.setText(Convert.weiToEther(trans.getValue()).toString() + " eth");
-
-        if (selefAddress.equals(trans.getFrom())) {
-            txHolder.imgIcon.setImageResource(R.drawable.ic_arrow_upward_red_500_48dp);
-            txHolder.tvType.setText("转出");
-            txHolder.tvAddress.setText(trans.getTo());
-        }else {
-            txHolder.imgIcon.setImageResource(R.drawable.ic_arrow_downward_green_500_48dp);
-            txHolder.tvType.setText("转入");
-            txHolder.tvAddress.setText(trans.getFrom());
-        }
-
+        TxInfo trans = list.get(i);
+        String value = "0";
+       if(Util.compareValue(trans.getIncoming(),trans.getOutgoing())) {
+           value = trans.getIncoming();
+       }else {
+           value = trans.getOutgoing();
+       }
+        txHolder.tvValue.setText(value);
+        txHolder.tvTime.setText(trans.getTime());
+        txHolder.txId.setText(trans.getTxid());
         if (listener != null) {
             txHolder.itemview.setOnClickListener((viwe)->{
-                listener.itemClick(txHolder.itemview,trans);
+                //listener.itemClick(txHolder.itemview,trans);
             });
         }
     }
@@ -73,22 +68,22 @@ public class EthTxAdapter extends RecyclerView.Adapter<EthTxAdapter.TxHolder> {
 
      static class TxHolder extends RecyclerView.ViewHolder {
         ImageView imgIcon;
-        TextView tvType;
-        TextView tvAddress;
+        TextView txId;
+        TextView tvTime;
         TextView tvValue;
-        RelativeLayout itemview;
+        View itemview;
 
          TxHolder(@NonNull View itemView) {
             super(itemView);
             imgIcon = itemView.findViewById(R.id.type_icon);
-            tvType = itemView.findViewById(R.id.tv_type);
-            //tvAddress = itemView.findViewById(R.id.tv_address);
+             txId = itemView.findViewById(R.id.tv_txid);
+             tvTime = itemView.findViewById(R.id.tv_time);
             tvValue = itemView.findViewById(R.id.tv_value);
-            this.itemview = itemView.findViewById(R.id.itemview);
+            this.itemview = itemView;
         }
     }
 
     public interface TxItemClickListener{
-        void itemClick(View view, TransInfo transInfo);
+        void itemClick(View view, TxInfo transInfo);
     }
 }

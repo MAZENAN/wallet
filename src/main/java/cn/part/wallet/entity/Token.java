@@ -11,15 +11,19 @@ public class Token implements Parcelable {
     private BigDecimal tokenToCoin;
     private String address;
     private String contractaddress;
+    private String type;
+    private Boolean isToken;
 
     public Token(){}
 
-    public Token(String tokenName,BigDecimal tokenNum,BigDecimal tokenToCoin,String address,String contractaddress) {
+    public Token(String tokenName,BigDecimal tokenNum,BigDecimal tokenToCoin,String address,String contractaddress,String type,Boolean isToken) {
         this.tokenName = tokenName;
         this.tokenNum = tokenNum;
         this.tokenToCoin = tokenToCoin;
         this.address = address;
         this.contractaddress = contractaddress;
+        this.type = type;
+        this.isToken = isToken;
     }
 
     public void setTokenName(String tokenName) {
@@ -38,8 +42,16 @@ public class Token implements Parcelable {
         this.address = address;
     }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public void setContractaddress(String contractaddress) {
         this.contractaddress = contractaddress;
+    }
+
+    public void setIsToken(Boolean isToken) {
+        this.isToken = isToken;
     }
 
     public BigDecimal getTokenNum() {
@@ -62,6 +74,14 @@ public class Token implements Parcelable {
         return contractaddress;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public Boolean getToken() {
+        return isToken;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -74,6 +94,8 @@ public class Token implements Parcelable {
         parcel.writeString(tokenToCoin.toString());
         parcel.writeString(address);
         parcel.writeString(contractaddress);
+        parcel.writeString(type);
+        parcel.writeString(String.valueOf(isToken));
     }
 
     public static final Parcelable.Creator<Token> CREATOR = new Creator<Token>() {
@@ -85,6 +107,8 @@ public class Token implements Parcelable {
             token.tokenToCoin = new BigDecimal(parcel.readString());
             token.address = parcel.readString();
             token.contractaddress = parcel.readString();
+            token.type = parcel.readString();
+            token.isToken = parcel.readString().equals("true");
             return token;
         }
 

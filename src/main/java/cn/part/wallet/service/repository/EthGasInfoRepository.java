@@ -36,6 +36,7 @@ public class EthGasInfoRepository {
         }
         return ethGassRepository;
     }
+
     public MutableLiveData<ETHGas> getGas() {
         final MutableLiveData<ETHGas> data = new MutableLiveData<>();
         iEthService.getGas().enqueue(new Callback<ETHGas>() {

@@ -79,22 +79,48 @@
                 <!--android:drawableLeft="@drawable/selector_main_add_property"/>-->
         </RelativeLayout>
         <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefresh_property"
+            android:id="@+id/swf_property"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/rc_property"
+                android:id="@+id/rc_token"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </android.support.v4.widget.SwipeRefreshLayout>
-
     </LinearLayout>
 </LinearLayout>
-    <android.support.design.widget.NavigationView
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="340dp"
         android:layout_height="match_parent"
-        android:id="@+id/nav_view"
-        app:headerLayout="@layout/nav_header_view"
-        android:layout_gravity="start">
-    </android.support.design.widget.NavigationView>
+        android:layout_gravity="start"
+        android:orientation="vertical"
+        android:id="@+id/ll_nav"
+        android:background="@color/white">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="?attr/colorPrimary">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/avator"
+                android:src="@drawable/avator_normal"
+                android:layout_centerInParent="true"/>
+            <TextView
+                android:id="@+id/tv_identity_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/avator"
+                android:textSize="@dimen/sp_16"
+                android:textColor="@color/white"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="@dimen/dp_10"/>
+        </RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rc_wallet_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="start"
+            android:layout_weight="1"/>
+    </LinearLayout>
 </android.support.v4.widget.DrawerLayout>

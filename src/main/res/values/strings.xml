@@ -157,4 +157,6 @@
     <string name="address_add_name_hint">名称</string>
     <string name="address_add_desc_hint">描述 (选填)</string>
 
+    <string name="get_txlist_fail">"获取交易列表失败"</string>
+
 </resources>

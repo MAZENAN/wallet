@@ -5,21 +5,18 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
-import android.util.Log;
-
 import org.consenlabs.tokencore.wallet.Identity;
 import org.consenlabs.tokencore.wallet.Wallet;
-import org.consenlabs.tokencore.wallet.WalletManager;
-
-import java.util.HashMap;
 import java.util.List;
-
 import cn.part.wallet.entity.WalletInfo;
-
+import cn.part.wallet.utils.MyThreadPool;
 import static android.content.Context.MODE_PRIVATE;
 
 public class ProperyViewModel extends AndroidViewModel {
     private MutableLiveData<WalletInfo> wallet = null;
+
+    private MutableLiveData<List<Wallet>> walletList;
+    private MutableLiveData<Wallet> currentWallet;
 
     public ProperyViewModel(@NonNull Application application) {
         super(application);
@@ -45,5 +42,40 @@ public class ProperyViewModel extends AndroidViewModel {
         return wallet;
     }
 
+    public MutableLiveData<Wallet> getDefaultWallet() {
+        if (currentWallet==null) {
+            currentWallet = new MutableLiveData<>();
+            MyThreadPool.execute(this::loadDefaultWallet);
+        }
+        return currentWallet;
+    }
 
+    public void setDefaultWallet(Wallet wallet) {
+        getDefaultWallet().postValue(wallet);
+    }
+
+    private void loadDefaultWallet() {
+        getDefaultWallet();
+        Wallet wallet = Identity.getCurrentIdentity().getWallets().get(0);
+        currentWallet.postValue(wallet);
+    }
+
+
+    public MutableLiveData<List<Wallet>> getWalletList() {
+        if (walletList== null) {
+            walletList = new MutableLiveData<>();
+            MyThreadPool.execute(this::getAllWallets);
+        }
+        return walletList;
+    }
+
+    private void getAllWallets() {
+        List<Wallet> wallets = Identity.getCurrentIdentity().getWallets();
+        walletList.postValue(wallets);
+    }
+
+    public void refreshWallets() {
+        getWalletList();
+        MyThreadPool.execute(this::getAllWallets);
+    }
 }
