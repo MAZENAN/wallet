@@ -4,17 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-
 import java.math.BigInteger;
-
 import cn.part.wallet.R;
 
-
 public class TransactionPreView extends FrameLayout {
-
     public TransactionPreView(Context context, OnClickListener onClickListener) {
         super(context);
-
         LayoutInflater.from(getContext())
                 .inflate(R.layout.layout_confrim_transcation, this, true);
 

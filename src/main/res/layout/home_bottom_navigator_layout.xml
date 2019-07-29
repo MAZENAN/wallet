@@ -1,52 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:weightSum="2">
+    android:layout_height="@dimen/bottom_bar_height"
+    android:weightSum="2"
+    android:background="@color/white">
     <LinearLayout
         android:id="@+id/lly_mall"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:gravity="center">
         <ImageView
             android:id="@+id/iv_mall"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="@dimen/bottom_bar_icon_wallet"
+            android:layout_height="@dimen/bottom_bar_icon_wallet"
             android:src="@drawable/home_bottom_tab_mall_selector" />
         <TextView
             android:id="@+id/tv_mall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3.5dp"
             android:gravity="center"
+            android:layout_marginLeft="1dp"
             android:text="@string/homepage_tab_text_mall"
             android:textColor="@drawable/home_bottom_tab_text_color_selector"
-            android:textSize="12sp" />
+            android:textSize="@dimen/sp_14" />
     </LinearLayout>
+    <View
+        android:layout_width="1dp"
+        android:layout_height="24dp"
+        android:background="@color/separate"
+        android:layout_gravity="center_vertical" />
     <LinearLayout
         android:id="@+id/lly_mine"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:gravity="center">
         <ImageView
             android:id="@+id/iv_mine"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="@dimen/bottom_bar_icon_wallet"
+            android:layout_height="@dimen/bottom_bar_icon_wallet"
             android:src="@drawable/home_bottom_tab_mine_selector" />
         <TextView
             android:id="@+id/tv_mine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3.5dp"
             android:gravity="center"
+            android:layout_marginLeft="1dp"
             android:text="@string/homepage_tab_text_mine"
             android:textColor="@drawable/home_bottom_tab_text_color_selector"
-            android:textSize="12sp" />
+            android:textSize="@dimen/sp_14" />
     </LinearLayout>
 </LinearLayout>

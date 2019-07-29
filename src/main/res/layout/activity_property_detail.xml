@@ -1,92 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical">
-
+<include layout="@layout/common_toolbar"/>
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="270dp"
-        android:background="@color/property_drawer_wallet_item_bg_color"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="23dp">
-
-            <LinearLayout
-                android:id="@+id/lly_back"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="9dp"
-                    android:layout_height="16dp"
-                    android:src="@drawable/ic_back" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="@string/property_detail_title"
-                android:textColor="@color/discovery_application_text_color"
-                android:textSize="18sp" />
-
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/tv_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="0.00000"
-            android:textColor="@color/discovery_application_item_name_color"
-            android:textSize="30sp" />
-
-    </LinearLayout>
-
-
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/refresh_layout"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        >
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rc_tx_list"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_20"
+        android:background="@color/global_bg_grey"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <RelativeLayout
+            style="@style/property_card">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_main_wallet_name"
+                android:textColor="@color/white"
+                android:layout_alignParentTop="true"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold"
+                android:text="aaaa"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:textColor="@color/white"
+                android:textSize="36sp"
+                android:text="128.23"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:id="@+id/tv_amount"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
-    </android.support.v4.widget.SwipeRefreshLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/property_bar"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/dp_20"
+            android:paddingEnd="@dimen/dp_20"
+            android:paddingTop="@dimen/dp_15">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:text="@string/text_property"
+                android:textStyle="bold"
+                android:textSize="@dimen/sp_18"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:textColor="#FF333333"
+                android:id="@+id/tv_main_wallet__property"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line"/>
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/refresh_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rc_tx_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:overScrollMode="never"/>
+            </android.support.v4.widget.SwipeRefreshLayout>
+        </LinearLayout>
+
+</LinearLayout>
 
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/item_divider_bg_color" />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp">
-
+        android:layout_height="49dp">
         <LinearLayout
             android:id="@+id/lly_transfer"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/transfer_advanced_setting_help_text_color"
+            android:background="@color/white"
             android:gravity="center"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="23dp"
+                android:layout_width="@dimen/sp_18"
                 android:layout_height="23dp"
                 android:src="@drawable/ic_property_transfer" />
 
@@ -96,23 +105,27 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginStart="5dp"
                 android:text="@string/property_detail_transfer"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:textColor="#FF333333"
+                android:textSize="@dimen/sp_14" />
 
         </LinearLayout>
-
+        <View
+            android:layout_width="1dp"
+            android:layout_height="24dp"
+            android:background="@color/separate"
+            android:layout_gravity="center_vertical" />
         <LinearLayout
             android:id="@+id/lly_gathering"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/discovery_application_item_name_color"
+            android:background="@color/white"
             android:gravity="center"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="23dp"
-                android:layout_height="23dp"
+                android:layout_width="@dimen/sp_18"
+                android:layout_height="@dimen/sp_18"
                 android:src="@drawable/ic_property_gathering" />
 
             <TextView
@@ -121,11 +134,9 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginStart="5dp"
                 android:text="@string/property_detail_gathering"
-                android:textColor="@color/white"
+                android:textColor="#FF333333"
                 android:textSize="14sp" />
 
         </LinearLayout>
     </LinearLayout>
-
-
 </LinearLayout>

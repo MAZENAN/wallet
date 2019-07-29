@@ -32,8 +32,7 @@ public class SwitchWalletAdapter extends RecyclerView.Adapter<SwitchWalletAdapte
     @Override
     public void onBindViewHolder(@NonNull WalletHolder walletHolder, int i) {
         Wallet wallet = mList.get(i);
-        String address =wallet.getAddress();
-        walletHolder.tvWalletAddr.setText(address.substring(0,10)+"..."+address.substring(29));
+        walletHolder.tvWalletAddr.setText(wallet.getAddress());
         //TODO 设置icon
         if (mListener!=null){
             walletHolder.rootview.setOnClickListener((view)->{

@@ -34,6 +34,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.part.wallet.R;
 import cn.part.wallet.entity.WalletInfo;
+import cn.part.wallet.utils.LogUtils;
 import cn.part.wallet.view.loading.CustomDialog;
 
 public abstract class BaseFragment extends Fragment {
@@ -64,7 +65,6 @@ public abstract class BaseFragment extends Fragment {
         return parentView;
     }
 
-
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -77,7 +77,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected  void initToolBar(){
-        toolbar = getActivity().findViewById(R.id.common_toolbar);
+        toolbar = activity.findViewById(R.id.common_toolbar);
         if (null!=toolbar){
             ImmersionBar.with(this)
                     .titleBar(toolbar, false)
@@ -85,7 +85,6 @@ public abstract class BaseFragment extends Fragment {
                     .statusBarDarkFont(true, 1f)
                     .navigationBarColor(R.color.white)
                     .init();
-            ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         }
     };
 

@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -18,15 +17,9 @@ import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import org.consenlabs.tokencore.foundation.crypto.Multihash;
 import org.consenlabs.tokencore.wallet.Identity;
 import org.consenlabs.tokencore.wallet.Wallet;
 import org.consenlabs.tokencore.wallet.WalletManager;
-import org.consenlabs.tokencore.wallet.model.ChainType;
-import org.consenlabs.tokencore.wallet.transaction.EthereumTransaction;
-import org.consenlabs.tokencore.wallet.transaction.TransactionSigner;
-import org.consenlabs.tokencore.wallet.transaction.TxSignResult;
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
@@ -37,19 +30,17 @@ import butterknife.OnClick;
 import cn.part.wallet.R;
 import cn.part.wallet.base.BaseActivity;
 import cn.part.wallet.entity.Token;
-import cn.part.wallet.entity.WalletInfo;
-import cn.part.wallet.service.response.ETHNonce;
-import cn.part.wallet.service.response.EthGasPrice;
+import cn.part.wallet.service.response.Gasinfo;
+import cn.part.wallet.service.response.TradeResponse;
 import cn.part.wallet.utils.Convert;
 import cn.part.wallet.utils.LogUtils;
 import cn.part.wallet.utils.ToastUtil;
 import cn.part.wallet.view.InputPwdView;
 import cn.part.wallet.view.TransactionPreView;
 import cn.part.wallet.viewmodel.EthViewmodel;
-import cn.part.wallet.viewmodel.WalletViewModel;
+import cn.part.wallet.viewmodel.TransferViewModel;
 
 public class TransferActivity extends BaseActivity {
-
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.iv_btn)
@@ -84,7 +75,6 @@ public class TransferActivity extends BaseActivity {
     private String walletAddr;
     private String contractAddress;
     private int decimals;
-    private String balance;
     private String symbol;
     private String netCost;
 
@@ -96,19 +86,18 @@ public class TransferActivity extends BaseActivity {
     private boolean sendingTokens = false;
     private BigInteger nonce = new BigInteger("0");
     private BigDecimal gasLow = new BigDecimal("1.0");
-    private BigDecimal gasFast = new BigDecimal("20");
+//    private BigDecimal gasFast = new BigDecimal("20");
     private BigDecimal gasFastest = new BigDecimal("20");
 
-    private String chainId = "";
     private Dialog dialog;
     private BigDecimal tokenNum;
     private EthViewmodel ethViewmodel;
-    private WalletInfo walletInfo;
+    private Wallet wallet;
+    private TransferViewModel mTransferViewModel;
+    private Token token;
 
     @Override
-    protected void onBeforeSetContentLayout() {
-
-    }
+    protected void onBeforeSetContentLayout() { }
 
     @Override
     public int getLayoutId() {
@@ -124,48 +113,65 @@ public class TransferActivity extends BaseActivity {
     @Override
     public void initDatas() {
         Intent intent = getIntent();
-        Token token = intent.getParcelableExtra("token");
+        token = intent.getParcelableExtra("token");
         walletAddr = token.getAddress();
+        String walletId = intent.getStringExtra("wallet_id");
         contractAddress = token.getContractaddress();
         decimals = token.getTokenNum().toBigInteger().intValue();
         symbol = token.getTokenName();
         tokenNum = token.getTokenNum();
+        wallet = WalletManager.mustFindWalletById(walletId);
 
         ethViewmodel = ViewModelProviders.of(this).get(EthViewmodel.class);
-        ethViewmodel.getETHGas().observe(this,(getEthGas)->{
-            if (getEthGas!=null){
-                LogUtils.i(TAG,"网络获取:low"+getEthGas.getSafeLow());
-                LogUtils.i(TAG,"网络获取:fast"+getEthGas.getFast());
-                LogUtils.i(TAG,"网络获取:Fastest"+getEthGas.getFastest());
-                LogUtils.i(TAG,"网络获取:BlockNum"+getEthGas.getBlockNum());
-                gasLow = Convert.valueToGwei(getEthGas.getSafeLow());
-                gasFast = Convert.valueToGwei(getEthGas.getFast());
-                gasFastest = Convert.valueToGwei(getEthGas.getFastest());
-                currentGasPrice = gasLow;
-                chainId = String.valueOf(getEthGas.getBlockNum());
-                amountPrice = Convert.calGas(currentGasPrice,new BigDecimal(gasLimit));
-                tvGasCost.setText(amountPrice.toString()+ " eth");
-                tvGasPrice.setText(currentGasPrice.toString() + "gwei");
-                updateProgress(gasLow,gasFastest,currentGasPrice);
-            }
-        });
-        ethViewmodel.getEthNonce(walletAddr).observe(this, new Observer<ETHNonce>() {
-            @Override
-            public void onChanged(@Nullable ETHNonce ethNonce) {
-                if (nonce !=null){
-                    nonce = new BigInteger(ethNonce.getResult().substring(2),16);
-                }
-
-            }
-        });
-         walletInfo = ViewModelProviders.of(this).get(WalletViewModel.class).getWalletListLiveData().getValue().get(0);
-
+        mTransferViewModel = ViewModelProviders.of(this).get(TransferViewModel.class);
+        mTransferViewModel.getGas(token).observe(this,this::onGetGas);
+        mTransferViewModel.getEthTxResponse().observe(this,this::onCreateTrade);
 
         tvTitle.setText(symbol + getString(R.string.transfer_title));
         amountPrice = Convert.calGas(currentGasPrice,new BigDecimal(gasLimit));
         LogUtils.i(TAG,"初始值amountPrice: "+amountPrice.toString());
     }
 
+    private void onCreateTrade(TradeResponse tradeResponse) {
+        if (tradeResponse == null) {
+            ToastUtil.showToast("交易失败");
+        }else {
+            if (tradeResponse.getStatus()==200){
+                LogUtils.i(TAG,"返回交易hash"+tradeResponse.getData().getHash());
+                String hash = tradeResponse.getData().getHash();
+                //保存交易hash
+            }else {
+                ToastUtil.showToast(tradeResponse.getR());
+            }
+        }
+    }
+
+    /**
+     * 获取到gas信息时的回调
+     * @param dataBean
+     */
+    private void onGetGas(Gasinfo.DataBean dataBean) {
+        if (dataBean != null) {
+            LogUtils.i(TAG,"gas max"+dataBean.getMax());
+            LogUtils.i(TAG,"gas min"+dataBean.getMin());
+            LogUtils.i(TAG,"nonce"+dataBean.getMin());
+            nonce = new BigInteger(dataBean.getNum().substring(2),16);
+            gasLow = Convert.valueToGwei(dataBean.getMin());
+            gasFastest = Convert.valueToGwei(dataBean.getMax());
+            currentGasPrice = gasLow;
+            amountPrice = Convert.calGas(currentGasPrice,new BigDecimal(gasLimit));
+            tvGasCost.setText(amountPrice.toString()+ " eth");
+            tvGasPrice.setText(currentGasPrice.toString() + "gwei");
+            updateProgress(gasLow,gasFastest,currentGasPrice);
+        }
+    }
+
+    /**
+     * seekbar 更新
+     * @param low
+     * @param fast
+     * @param current
+     */
     private void updateProgress(BigDecimal low,BigDecimal fast,BigDecimal current) {
         seekbar.setMax(fast.intValue());
         seekbar.setProgress(current.intValue());
@@ -194,7 +200,6 @@ public class TransferActivity extends BaseActivity {
                             currentGasPrice = temp;
                             updateView();
                         }
-
                     }
                 }
             }
@@ -221,7 +226,6 @@ public class TransferActivity extends BaseActivity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
@@ -229,6 +233,7 @@ public class TransferActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
             }
         });
+        tvTitle.setText(token.getTokenName()+"转账");
     }
 
     @OnCheckedChanged(R.id.advanced_switch)
@@ -256,37 +261,34 @@ public class TransferActivity extends BaseActivity {
                 showTransInfoDialog();
                 break;
             case R.id.confirm_button:
-
                 InputPwdView pwdView = new InputPwdView(this, pwd -> {
                     if (sendingTokens) {
-
-//                        viewModel.createTokenTransfer(pwd,
-//                                etTransferAddress.getText().toString().trim(),
-//                                contractAddress,
-//                                BalanceUtils.tokenToWei(new BigDecimal(amountText.getText().toString().trim()), decimals).toBigInteger(),
-//                                gasPrice,
-//                                gasLimit
-//                        );
                     } else {
                         LogUtils.i(TAG,"eth转账 输入密码：开始生成txtrans");
-//                        viewModel.createTransaction(pwd, etTransferAddress.getText().toString().trim(),
-//                                Convert.toWei(amountText.getText().toString().trim(), Convert.Unit.ETHER).toBigInteger(),
-//                                gasPrice,
-//                                gasLimit );
-
-                        ethViewmodel.createTrans(nonce,
+//                        ethViewmodel.createTrans(
+//                                nonce,
+//                                Convert.gweiToWei(currentGasPrice),
+//                                new BigInteger(gasLimit.toString()),
+//                                etTransferAddress.getText().toString().trim(),
+//                                Convert.etherToWei(etAmount.getText().toString().trim()),
+//                                "",
+//                                "4",
+//                                pwd,
+//                                wallet
+//                        );
+                        mTransferViewModel.createEthTrans(
+                                nonce,
                                 Convert.gweiToWei(currentGasPrice),
                                 new BigInteger(gasLimit.toString()),
                                 etTransferAddress.getText().toString().trim(),
                                 Convert.etherToWei(etAmount.getText().toString().trim()),
                                 "",
-                                chainId,
+                                "4",
                                 pwd,
-                                WalletManager.mustFindWalletById(walletInfo.getId())
+                                wallet
                         );
                     }
                 });
-
                 dialog = new BottomSheetDialog(this);
                 dialog.setContentView(pwdView);
                 dialog.setCancelable(true);

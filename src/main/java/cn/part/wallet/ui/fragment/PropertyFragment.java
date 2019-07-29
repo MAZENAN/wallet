@@ -35,8 +35,6 @@ import cn.part.wallet.ui.adapter.TokenAdapter;
 import cn.part.wallet.viewmodel.ProperyViewModel;
 
 public class PropertyFragment extends BaseFragment {
-    @BindView(R.id.common_toolbar)
-    Toolbar mToolbar;
     @BindView(R.id.swf_property)
     SwipeRefreshLayout refresh;
     @BindView(R.id.tv_title)

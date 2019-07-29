@@ -8,9 +8,8 @@ import cn.part.wallet.R;
 import cn.part.wallet.entity.Token;
 import cn.part.wallet.entity.TxInfo;
 import cn.part.wallet.service.IWalletApi;
-import cn.part.wallet.service.response.ETHNonce;
-import cn.part.wallet.service.response.EthResponse;
-import cn.part.wallet.service.response.EthTxInfo;
+import cn.part.wallet.service.response.Gasinfo;
+import cn.part.wallet.service.response.TradeResponse;
 import cn.part.wallet.service.response.TxList;
 import cn.part.wallet.utils.LogUtils;
 import cn.part.wallet.utils.ToastUtil;
@@ -86,5 +85,42 @@ public class WalletRepository {
                 ToastUtil.showToast(R.string.get_txlist_fail);
             }
         });
+    }
+
+    public MutableLiveData<Gasinfo.DataBean> getGas(Token token) {
+        final MutableLiveData<Gasinfo.DataBean> data = new MutableLiveData<>();
+        iWalletService.getFee(Util.chainTypeDesc(token.getType()),token.getAddress(),IWalletApi.NET_TEST).enqueue(new Callback<Gasinfo>() {
+            @Override
+            public void onResponse(Call<Gasinfo> call, Response<Gasinfo> response) {
+                if (response.body().getStatus()==200) {
+                    data.postValue(response.body().getData());
+                }else {
+                    data.postValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Gasinfo> call, Throwable t) {
+                ToastUtil.showToast("网络连接失败");
+                data.postValue(null);
+            }
+        });
+        return data;
+    }
+
+    public void sendTrans (MutableLiveData<TradeResponse> data,String type,String hex){
+            iWalletService.sendTrans(Util.chainTypeDesc(type),hex,IWalletApi.NET_TEST).enqueue(new Callback<TradeResponse>() {
+                @Override
+                public void onResponse(Call<TradeResponse> call, Response<TradeResponse> response) {
+                    data.postValue(response.body());
+                    LogUtils.i("http","发送成功"+response.body());
+                }
+
+                @Override
+                public void onFailure(Call<TradeResponse> call, Throwable t) {
+                    data.postValue(null);
+                    LogUtils.e("http","请求失败："+ t.getMessage());
+                }
+            });
     }
 }

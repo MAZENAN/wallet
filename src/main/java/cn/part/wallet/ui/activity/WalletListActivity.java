@@ -1,15 +1,11 @@
 package cn.part.wallet.ui.activity;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-
 import org.consenlabs.tokencore.wallet.Identity;
-import org.consenlabs.tokencore.wallet.WalletManager;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.part.wallet.R;
@@ -49,7 +45,7 @@ public class WalletListActivity extends BaseActivity {
 
     @Override
     public void configViews() {
-        tvTitle.setText(R.string.mine_wallet_manage);
+        tvTitle.setText("钱包管理");
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);

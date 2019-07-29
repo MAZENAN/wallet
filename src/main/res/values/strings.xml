@@ -49,20 +49,10 @@
 
     <string name="homepage_tab_text_mall">钱包</string>
     <string name="homepage_tab_text_mine">我的</string>
-    <string name="mine_title">我</string>
+    <string name="mine_title">我的</string>
     <string name="property_drawer_qrcode_scanner">扫一扫</string>
     <string name="property_drawer_create_wallet">创建钱包</string>
 
-
-    <string name="mine_wallet_manage">钱包管理</string>
-    <string name="mine_address_manage">地址管理</string>
-    <string name="mine_trade_record">交易记录</string>
-    <string name="mine_msg_center">消息中心</string>
-    <string name="mine_contracts">联系人</string>
-    <string name="mine_system_setting">系统设置</string>
-    <string name="mine_personal_center">个人中心</string>
-    <string name="mine_help_center">帮助与反馈</string>
-    <string name="mine_about_us">关于我们</string>
 
     <string name="property_total_assets_cny">总资产(¥)</string>
     <string name="property_total_assets_usd">总资产($)</string>
@@ -158,5 +148,22 @@
     <string name="address_add_desc_hint">描述 (选填)</string>
 
     <string name="get_txlist_fail">"获取交易列表失败"</string>
+    <string name="text_property">资产</string>
+    <string name="text_trans">交易记录</string>
 
+    <string name="quick_bar_text_trans">转账</string>
+    <string name="quick_bar_text_receipt">收款</string>
+    <string name="quick_bar_text_scan">扫一扫</string>
+    <string name="quick_bar_text_trad">一键买卖</string>
+
+    <string name="mine_avator">头像</string>
+    <string name="mine_identity_name">身份名</string>
+    <string name="mine_identity_id">身份名ID</string>
+    <string name="mine_into_wallet">钱包管理</string>
+    <string name="mine_into_setting">使用设置</string>
+    <string name="mine_into_help">帮助与反馈</string>
+    <string name="mine_into_protocol">用户协议</string>
+    <string name="mine_into_about">关于我们</string>
+    <string name="mine_backup">备份身份</string>
+    <string name="mine_quit">退出当前身份</string>
 </resources>

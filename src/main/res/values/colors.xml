@@ -22,13 +22,14 @@
     <!--通用分割线粗-->
 
     <color name="item_divider_bg_color">#F0F0F0</color>
-    <color name="home_tab_text_selected_color">#53d2d5</color>
-    <color name="home_tab_text_unselected_color">#d9d9d9</color>
+    <color name="home_tab_text_selected_color">#EF1C06</color>
+    <color name="separate">#E1E1E1</color>
+    <color name="home_tab_text_unselected_color">#333333</color>
     <color name="base_text_color">#323232</color>
     <color name="property_ico_name_color">#393a3a</color>
     <color name="property_ico_worth_color">#999999</color>
     <color name="mine_menu_text_color">#1c314a</color>
-    <color name="mine_menu_divider_color">#eaeaea</color>
+    <color name="mine_menu_divider_color">#FFD8D8D8</color>
     <color name="discovery_application_text_color">#292929</color>
     <color name="discovery_application_item_name_color">#2b4869</color>
 
@@ -59,7 +60,7 @@
 
     <color name="text_blue">#2196F3</color>
 
-    <color name="global_bg_grey">#eaeaea</color>
+    <color name="global_bg_grey">#FFF7F7F7</color>
 
     <color name="address_press">#13227a</color>
     <color name="receipt_bg">#C41A1C22</color>
@@ -68,4 +69,17 @@
     <color name="addr_text_bg">#07000000</color>
 
     <color name="token_text">#6f767c</color><!--token type name-->
+
+    <color name="quick_bar_text">#FF333333</color>
+    <color name="line">#ffe1e1e1</color>
+    <color name="identity_name">#FF333333</color>
+    <color name="nav_wallet_text">#FF999999</color>
+
+    <color name="mine_text">#FF999999</color>
+    <color name="mine_backup">#FF4A90E2</color>
+    <color name="mine_back">#FF4A90E2</color>
+    <color name="mine_quit">#FFEF1C06</color>
+    <color name="mine_line">#FFE1E1E1</color>
+    <color name="mine_text_value">#FF333333</color>
+
 </resources>

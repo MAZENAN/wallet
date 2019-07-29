@@ -78,14 +78,20 @@
     <style name="bottomSheetStyleWrapper" parent="Widget.Design.BottomSheet.Modal">
         <item name="behavior_peekHeight">500dp</item>
     </style>
-
     <!--首页卡片样式-->
     <style name="WalletCard">
-        <item name="android:background">@drawable/wallet_card_bac</item>
-        <item name="android:paddingLeft">10dp</item>
-        <item name="android:paddingTop">10dp</item>
-        <item name="android:paddingRight">5dp</item>
-        <item name="android:paddingBottom">10dp</item>
+        <!--<item name="android:background">@drawable/wallet_card_bac</item>-->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">150dp</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:background">@drawable/bac_wallet_card</item>
+    </style>
+
+    <style name="property_card" parent="WalletCard">
+        <item name="android:layout_height">120dp</item>
     </style>
 
     <!--我的身份页面样式-->
@@ -119,5 +125,56 @@
     <style name="wallet_card_text">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+    <!--quick_bar样式-->
+    <style name="quick_bar">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+    <style name="quick_bar_icon">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">50dp</item>
+    </style>
+
+    <!--quickbar 字体样式-->
+    <style name="quick_bar_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">17dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/sp_12</item>
+        <item name="android:textColor">#FF333333</item>
+    </style>
+
+    <!--mine 页左侧字体样式1-->
+    <style name="mine_left_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/mine_text</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+    <!--mine 页左侧字体样式2-->
+    <style name="mine_left_text_into" parent="mine_left_text">
+        <item name="android:textColor">#FF333333</item>
+    </style>
+    <!--mine 底部字体样式-->
+    <style name="mine_identity_op">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="mine_into_icon">
+        <item name="android:layout_width">18dp</item>
+        <item name="android:layout_height">18dp</item>
+        <item name="android:src">@drawable/icon_into</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_centerVertical">true</item>
     </style>
 </resources>

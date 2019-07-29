@@ -25,8 +25,7 @@ public class WalletAdapter extends RecyclerView.Adapter<WalletAdapter.WalletHold
     @Override
     public WalletHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_walletinfo,viewGroup,false);
-        WalletHolder holder = new WalletHolder(view);
-        return holder;
+        return new WalletHolder(view);
     }
 
     @Override

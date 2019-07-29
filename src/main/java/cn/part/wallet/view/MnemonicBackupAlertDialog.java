@@ -5,13 +5,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
-
 import cn.part.wallet.R;
 
-
 public class MnemonicBackupAlertDialog extends Dialog implements View.OnClickListener {
-
-
     public MnemonicBackupAlertDialog(@NonNull Context context) {
         super(context);
     }

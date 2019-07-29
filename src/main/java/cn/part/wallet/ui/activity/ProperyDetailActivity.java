@@ -6,6 +6,10 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import org.consenlabs.tokencore.wallet.model.ChainType;
+
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
@@ -23,10 +27,15 @@ public class ProperyDetailActivity extends BaseActivity {
     RecyclerView rcTxList;
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout refreshLayout;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    @BindView(R.id.lly_transfer)
+    LinearLayout llyTransfer;
 
     private Token token;
     private PropertyDetailViewModel detailViewModel;
     private TxlistAdapter txlistAdapter;
+    private String walletId;
 
     @Override
     protected void onBeforeSetContentLayout() {}
@@ -43,7 +52,8 @@ public class ProperyDetailActivity extends BaseActivity {
     public void initDatas() {
         Intent intent = getIntent();
         token = intent.getParcelableExtra("token");
-        LogUtils.i(ProperyDetailActivity.class.getSimpleName(),token.getTokenName());
+        walletId = intent.getStringExtra("wallet_id");
+        LogUtils.i(TAG,token.getTokenName());
         detailViewModel = ViewModelProviders.of(this).get(PropertyDetailViewModel.class);
 
         txlistAdapter = new TxlistAdapter(new ArrayList<>());
@@ -75,6 +85,11 @@ public class ProperyDetailActivity extends BaseActivity {
         rcTxList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         rcTxList.setAdapter(txlistAdapter);
         refreshLayout.setOnRefreshListener(this::onRefresh);
+
+        tvTitle.setText(token.getTokenName());
+        if (token.getType().equals(ChainType.BITCOIN)){
+            llyTransfer.setEnabled(false);
+        }
     }
 
     private void onRefresh() {
@@ -88,6 +103,7 @@ public class ProperyDetailActivity extends BaseActivity {
             case R.id.lly_transfer:
                 intent = new Intent(mContext,TransferActivity.class);
                 intent.putExtra("token",token);
+                intent.putExtra("wallet_id",walletId);
                 startActivity(intent);
                 break;
         }
