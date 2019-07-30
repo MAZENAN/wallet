@@ -63,11 +63,18 @@ public class WalletManageActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_export_mnemonic:
-                String mnemonic = WalletManager.exportMnemonic(mWalletId, "123456").getMnemonic();
-                ToastUtil.showToast(mnemonic);
+                try{
+                    LogUtils.e(TAG,"钱包id"+mWalletId);
+                    String mnemonic = WalletManager.exportMnemonic(mWalletId, "123456").getMnemonic();
+                    ToastUtil.showToast(mnemonic);
+                }catch (Exception e){
+                    LogUtils.e(TAG,"导出失败" + e.getMessage());
+                }
+
                 break;
             case R.id.ll_export_privateKey:
                 String s = WalletManager.exportPrivateKey(mWalletId, "123456");
+                LogUtils.i(TAG,s);
                 ToastUtil.showToast(s);
                 break;
             case R.id.ll_export_keystore:
@@ -77,7 +84,6 @@ public class WalletManageActivity extends BaseActivity {
                 }catch (Exception e) {
                     LogUtils.e(TAG,"导出keystore失败"+e);
                 }
-
                 break;
         }
     }

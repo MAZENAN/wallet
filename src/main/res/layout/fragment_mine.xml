@@ -193,7 +193,8 @@
         android:paddingEnd="@dimen/dp_20"
         android:layout_marginTop="@dimen/dp_20">
             <TextView
-                 style="@style/mine_identity_op"
+                android:id="@+id/tv_backup_identity"
+                style="@style/mine_identity_op"
                 android:textColor="@color/mine_backup"
                 android:text="@string/mine_backup"/>
             <View
@@ -201,6 +202,7 @@
                 android:layout_height="1dp"
                 android:background="@color/mine_line"/>
         <TextView
+            android:id="@+id/tv_quit_identity"
             style="@style/mine_identity_op"
             android:textColor="@color/mine_quit"
             android:text="@string/mine_quit"/>

@@ -65,7 +65,7 @@
     <color name="address_press">#13227a</color>
     <color name="receipt_bg">#C41A1C22</color>
     <color name="transparent">#00000000</color>
-    <color name="ETH_bg">#009688</color>
+    <color name="ETH_bg">#FFFF5454</color>
     <color name="addr_text_bg">#07000000</color>
 
     <color name="token_text">#6f767c</color><!--token type name-->
@@ -81,5 +81,11 @@
     <color name="mine_quit">#FFEF1C06</color>
     <color name="mine_line">#FFE1E1E1</color>
     <color name="mine_text_value">#FF333333</color>
+
+    <color name="trans_out">#FF56B7FF</color>
+    <color name="trans_in">#FFFF5454</color>
+    <color name="progress">#FFFF5454</color>
+
+    <color name="global_black">#FF333333</color>
 
 </resources>

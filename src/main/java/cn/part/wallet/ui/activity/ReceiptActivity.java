@@ -5,15 +5,13 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
-
 import org.consenlabs.tokencore.wallet.Wallet;
 import org.consenlabs.tokencore.wallet.WalletManager;
+import org.consenlabs.tokencore.wallet.model.ChainType;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -36,6 +34,8 @@ public class ReceiptActivity extends BaseActivity {
     ImageView qrImg;
     private Wallet wallet;
     private CopyWalletPopWindow popWindow;
+    private String addr;
+
     @Override
     protected void onBeforeSetContentLayout() {
 
@@ -62,7 +62,11 @@ public class ReceiptActivity extends BaseActivity {
     @Override
     public void configViews() {
         tvWalletName.setText(wallet.getMetadata().getName());
-        tvWalletAddr.setText(wallet.getAddress());
+        addr = wallet.getAddress();
+        if (wallet.getMetadata().getChainType().equals(ChainType.ETHEREUM)){
+            addr = "0x" + addr;
+        }
+        tvWalletAddr.setText(addr);
         initQrCode();
     }
 
@@ -95,7 +99,7 @@ public class ReceiptActivity extends BaseActivity {
         // 将文本内容放到系统剪贴板里。
         if (cm != null) {
             // 创建普通字符型ClipData
-            ClipData mClipData = ClipData.newPlainText("Label", wallet.getAddress());
+            ClipData mClipData = ClipData.newPlainText("Label", addr);
             // 将ClipData内容放到系统剪贴板里。
             cm.setPrimaryClip(mClipData);
         }

@@ -6,16 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayoutManager;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.part.wallet.R;
@@ -26,15 +23,7 @@ import cn.part.wallet.ui.adapter.VerifyBackupSelectedMnemonicWordsAdapter;
 import cn.part.wallet.utils.LogUtils;
 import cn.part.wallet.utils.ToastUtil;
 
-
-/**
- * Created by Tiny 熊 @ Upchain.pro
- * WeiXin: xlbxiong
- */
-
-
 // 验证 助记词是否 正确界面
-
 public class VerifyMnemonicBackupActivity extends BaseActivity {
     private static final int VERIFY_SUCCESS_RESULT = 2202;
     @BindView(R.id.tv_title)
@@ -44,10 +33,6 @@ public class VerifyMnemonicBackupActivity extends BaseActivity {
     @BindView(R.id.rv_mnemonic)
     RecyclerView rvMnemonic;
     private String walletMnemonic;
-
-    private List<VerifyMnemonicWordTag> mnemonicWords;
-
-    private List<String> selectedMnemonicWords;
 
     private VerifyBackupMnemonicWordsAdapter verifyBackupMenmonicWordsAdapter;
     private VerifyBackupSelectedMnemonicWordsAdapter verifyBackupSelectedMnemonicWordsAdapter;
@@ -76,7 +61,7 @@ public class VerifyMnemonicBackupActivity extends BaseActivity {
         LogUtils.d("VerifyMnemonicBackUp", "walletMnemonic:" + walletMnemonic);
 
         String[] words = walletMnemonic.split("\\s+");
-        mnemonicWords = new ArrayList();
+        List<VerifyMnemonicWordTag> mnemonicWords = new ArrayList();
         for (int i = 0; i < words.length; i++) {
             VerifyMnemonicWordTag verifyMnemonicWordTag = new VerifyMnemonicWordTag();
             verifyMnemonicWordTag.setMnemonicWord(words[i]);
@@ -99,7 +84,7 @@ public class VerifyMnemonicBackupActivity extends BaseActivity {
         layoutManager2.setFlexWrap(FlexWrap.WRAP);
         layoutManager2.setAlignItems(AlignItems.STRETCH);
         rvSelected.setLayoutManager(layoutManager2);
-        selectedMnemonicWords = new ArrayList<>();
+        List<String> selectedMnemonicWords = new ArrayList<>();
         verifyBackupSelectedMnemonicWordsAdapter = new VerifyBackupSelectedMnemonicWordsAdapter(R.layout.list_item_mnemoic_selected, selectedMnemonicWords);
         rvSelected.setAdapter(verifyBackupSelectedMnemonicWordsAdapter);
     }
@@ -160,7 +145,11 @@ public class VerifyMnemonicBackupActivity extends BaseActivity {
 //                        AppManager.getAppManager().finishActivity(MnemonicBackupActivity.class);
                         setResult(VERIFY_SUCCESS_RESULT, new Intent());
                         finish();
-                        launchActivity(MainActivity.class);
+
+                        Intent intent =  new Intent(mContext,MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                       // launchActivity(MainActivity.class);
                     } else {
                         ToastUtil.showToast(R.string.verify_backup_failed);
                     }

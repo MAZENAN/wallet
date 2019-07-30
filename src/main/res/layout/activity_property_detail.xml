@@ -47,12 +47,11 @@
             android:background="@drawable/property_bar"
             android:orientation="vertical"
             android:paddingStart="@dimen/dp_20"
-            android:paddingEnd="@dimen/dp_20"
-            android:paddingTop="@dimen/dp_15">
+            android:paddingEnd="@dimen/dp_20">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
-                android:text="@string/text_property"
+                android:text="@string/text_trans"
                 android:textStyle="bold"
                 android:textSize="@dimen/sp_18"
                 android:layout_gravity="center_vertical"

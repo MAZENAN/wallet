@@ -32,9 +32,9 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_subject_black_24dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/icon_menu_list"
                 android:id="@+id/switch_menu"/>
         </LinearLayout>
 
@@ -59,7 +59,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginStart="5dp"
-                android:src="@drawable/ic_crop_free_black_24dp"/>
+                android:src="@drawable/ic_crop_free_black_24dp"
+                android:visibility="invisible"/>
         </LinearLayout>
 
         <View

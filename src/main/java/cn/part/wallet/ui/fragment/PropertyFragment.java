@@ -2,6 +2,7 @@ package cn.part.wallet.ui.fragment;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -32,6 +33,7 @@ import cn.part.wallet.ui.activity.QRCodeScannerActivity;
 import cn.part.wallet.ui.activity.ReceiptActivity;
 import cn.part.wallet.ui.adapter.SwitchWalletAdapter;
 import cn.part.wallet.ui.adapter.TokenAdapter;
+import cn.part.wallet.utils.LogUtils;
 import cn.part.wallet.viewmodel.ProperyViewModel;
 
 public class PropertyFragment extends BaseFragment {
@@ -49,9 +51,6 @@ public class PropertyFragment extends BaseFragment {
     ImageView opMenu;
     @BindView(R.id.drawer)
     DrawerLayout drawer;
-    @BindView(R.id.iv_btn)
-    ImageView qrBtn;
-
     @BindView(R.id.ll_nav)
     LinearLayout llNav;
     @BindView(R.id.rc_wallet_list)
@@ -84,8 +83,10 @@ public class PropertyFragment extends BaseFragment {
         tokenAdapter = new TokenAdapter(new ArrayList<>());
         tokenAdapter.setItemClickListener(this::onTokenItemClick);
 
-        switchWalletAdapter = new SwitchWalletAdapter(new ArrayList<>());
+        switchWalletAdapter = new SwitchWalletAdapter(mContext,new ArrayList<>());
         switchWalletAdapter.setItemClickListener(this::onWalletItemClick);
+//        SharedPreferences default_wallet = mContext.getSharedPreferences("default_wallet", 0);
+//        LogUtils.i("aaa","默认钱包id" + default_wallet.getString("current_wallet_id","a"));
     }
 
     @Override
@@ -123,7 +124,7 @@ public class PropertyFragment extends BaseFragment {
         ImmersionBar.with(this).destroy();
     }
 
-    @OnClick({R.id.btn_manage_wallet,R.id.tv_wallet_main_addr,R.id.switch_menu,R.id.iv_btn})
+    @OnClick({R.id.btn_manage_wallet,R.id.tv_wallet_main_addr,R.id.switch_menu,R.id.ll_scan,R.id.ll_receipt})
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()){
@@ -135,9 +136,15 @@ public class PropertyFragment extends BaseFragment {
             case R.id.switch_menu:
                 drawer.openDrawer(llNav);
                 break;
-            case R.id.iv_btn:
+            case R.id.ll_scan:
                 intent = new Intent(getActivity(), QRCodeScannerActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.ll_receipt:
+                intent = new Intent(getActivity(), ReceiptActivity.class);
+                intent.putExtra("wallet_id",currentWallet.getId());
+                startActivity(intent);
+                break;
         }
     }
 

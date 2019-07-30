@@ -1,21 +1,12 @@
 package cn.part.wallet.ui.adapter;
 
 import android.support.annotation.Nullable;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-
 import java.util.Collections;
 import java.util.List;
-
 import cn.part.wallet.R;
 import cn.part.wallet.domain.VerifyMnemonicWordTag;
-
-/**
- * Created by Tiny 熊 @ Upchain.pro
- * WeiXin: xlbxiong
- */
-
 
 public class VerifyBackupMnemonicWordsAdapter extends BaseQuickAdapter<VerifyMnemonicWordTag, BaseViewHolder> {
 
@@ -27,9 +18,10 @@ public class VerifyBackupMnemonicWordsAdapter extends BaseQuickAdapter<VerifyMne
     protected void convert(BaseViewHolder helper, VerifyMnemonicWordTag verifyMnemonicWordTag) {
         if (verifyMnemonicWordTag.isSelected()) {
             helper.setBackgroundColor(R.id.lly_tag, mContext.getResources().getColor(R.color.search_ico_upload_token));
+            helper.setBackgroundRes(R.id.lly_tag,R.drawable.btn_red);
             helper.setTextColor(R.id.tv_mnemonic_word,mContext.getResources().getColor(R.color.white));
         } else {
-            helper.setBackgroundColor(R.id.lly_tag, mContext.getResources().getColor(R.color.item_divider_bg_color));
+            helper.setBackgroundRes(R.id.lly_tag,R.drawable.btn_gray);
             helper.setTextColor(R.id.tv_mnemonic_word,mContext.getResources().getColor(R.color.discovery_application_text_color));
         }
         helper.setText(R.id.tv_mnemonic_word, verifyMnemonicWordTag.getMnemonicWord());

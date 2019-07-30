@@ -115,7 +115,7 @@ public class WalletAddActivity extends BaseActivity {
             case R.id.btn_create_wallet:
                 boolean res = checkInput();
                 if (res){
-                    getDialog().showLoadind();
+                    //getDialog().showLoadind();
                     showDialog("正在创建钱包...");
                     MyThreadPool.execute(()->{
                         try{

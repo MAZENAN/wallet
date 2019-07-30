@@ -18,7 +18,6 @@ import cn.part.wallet.entity.TransInfo;
 import cn.part.wallet.service.response.EthTxInfo;
 import cn.part.wallet.ui.activity.TxDetailActivity;
 import cn.part.wallet.ui.adapter.EthTxAdapter;
-import cn.part.wallet.utils.ToastUtil;
 import cn.part.wallet.viewmodel.PropertyDetailViewModel;
 
 public class InTransFragment extends BaseFragment {
@@ -57,7 +56,7 @@ public class InTransFragment extends BaseFragment {
         }
         detailViewModel = ViewModelProviders.of(this).get(PropertyDetailViewModel.class);
 //        detailViewModel.getEthTxList(address).observe(this,this::onTxListGet);
-        detailViewModel.getLoadind().observe(this,this::onLoading);
+        detailViewModel.getLoading().observe(this,this::onLoading);
     }
 
     @Override

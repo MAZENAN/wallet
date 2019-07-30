@@ -123,8 +123,8 @@
     </style>
 
     <style name="wallet_card_text">
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textColor">#FF333333</item>
+        <item name="android:textSize">@dimen/sp_18</item>
     </style>
     <!--quick_bar样式-->
     <style name="quick_bar">
@@ -176,5 +176,20 @@
         <item name="android:src">@drawable/icon_into</item>
         <item name="android:layout_alignParentEnd">true</item>
         <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="button_red">
+        <item name="android:layout_width">225dp</item>
+        <item name="android:layout_height">49dp</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/btn_red</item>
+    </style>
+    <style name="button_gray">
+        <item name="android:layout_width">225dp</item>
+        <item name="android:layout_height">49dp</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/btn_gray</item>
     </style>
 </resources>

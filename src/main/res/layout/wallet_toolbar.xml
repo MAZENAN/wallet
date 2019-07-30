@@ -32,12 +32,10 @@
             android:layout_marginLeft="5dp"
             android:gravity="center"
             android:orientation="vertical">
-
             <ImageView
-                android:layout_width="9dp"
-                android:layout_height="16dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:src="@drawable/ic_back" />
-
         </LinearLayout>
 
         <LinearLayout

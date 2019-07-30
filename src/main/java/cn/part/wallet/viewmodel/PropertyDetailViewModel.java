@@ -10,14 +10,14 @@ import cn.part.wallet.entity.TxInfo;
 import cn.part.wallet.service.repository.WalletRepository;
 
 public class PropertyDetailViewModel extends AndroidViewModel {
-    private MutableLiveData<Boolean> loadind = new MutableLiveData<>();
+    private MutableLiveData<Boolean> loading = new MutableLiveData<>();
     private MutableLiveData<List<TxInfo>> mTxlistData;
     private WalletRepository mWalletRepository;
 
     public PropertyDetailViewModel(@NonNull Application application) {
         super(application);
         mWalletRepository = WalletRepository.getInstance();
-        loadind.setValue(false);
+        loading.setValue(false);
     }
 
     public MutableLiveData<List<TxInfo>> getETxList(Token token) {
@@ -32,11 +32,11 @@ public class PropertyDetailViewModel extends AndroidViewModel {
         mWalletRepository.reGetTxList(mTxlistData,token);
     }
 
-    public MutableLiveData<Boolean> getLoadind() {
-        return loadind;
+    public MutableLiveData<Boolean> getLoading() {
+        return loading;
     }
 
     public void setLoading(Boolean isLoading) {
-        loadind.setValue(isLoading);
+        loading.setValue(isLoading);
     }
 }

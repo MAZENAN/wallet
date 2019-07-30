@@ -36,6 +36,7 @@ import cn.part.wallet.utils.Convert;
 import cn.part.wallet.utils.LogUtils;
 import cn.part.wallet.utils.ToastUtil;
 import cn.part.wallet.view.InputPwdView;
+import cn.part.wallet.view.PwdInputAlertDialog;
 import cn.part.wallet.view.TransactionPreView;
 import cn.part.wallet.viewmodel.EthViewmodel;
 import cn.part.wallet.viewmodel.TransferViewModel;
@@ -51,8 +52,6 @@ public class TransferActivity extends BaseActivity {
     EditText etTransferAddress;
     @BindView(R.id.et_amount)
     EditText etAmount;
-    @BindView(R.id.lly_contacts)
-    LinearLayout llyContacts;
     @BindView(R.id.seekbar)
     SeekBar seekbar;
     @BindView(R.id.tv_gas_cost)
@@ -61,8 +60,6 @@ public class TransferActivity extends BaseActivity {
     TextView tvGasPrice;
     @BindView(R.id.lly_gas)
     LinearLayout llyGas;
-    @BindView(R.id.et_hex_data)
-    EditText etHexData;
     @BindView(R.id.lly_advance_param)
     LinearLayout llyAdvanceParam;
     @BindView(R.id.advanced_switch)
@@ -78,20 +75,21 @@ public class TransferActivity extends BaseActivity {
     private String symbol;
     private String netCost;
 
-    private BigDecimal gasPrice = new BigDecimal("1.0");//1gwei
-    private BigInteger gasLimit = new BigInteger("21000");
-    private BigDecimal currentGasPrice = gasPrice;//单位gv
+
+
+
     private Boolean isCustomGas = false;
     private BigDecimal amountPrice;
-    private boolean sendingTokens = false;
-    private BigInteger nonce = new BigInteger("0");
-    private BigDecimal gasLow = new BigDecimal("1.0");
+    private BigInteger nonce = new BigInteger("-1"); //nonce 默认值
+    private BigDecimal gasLow = new BigDecimal("1.00"); //gas最低值 默认值gwei
 //    private BigDecimal gasFast = new BigDecimal("20");
-    private BigDecimal gasFastest = new BigDecimal("20");
+    private BigDecimal gasFastest = new BigDecimal("20.00");//gas最高值默认值 gwei
+    private BigInteger gasLimit = new BigInteger("21000");//gaslimit 默认值
+    private BigDecimal gasPrice = gasLow;//gas price 默认值
+    private BigDecimal currentGasPrice = gasLow;//单位gwei 当前gasprice
 
     private Dialog dialog;
     private BigDecimal tokenNum;
-    private EthViewmodel ethViewmodel;
     private Wallet wallet;
     private TransferViewModel mTransferViewModel;
     private Token token;
@@ -122,7 +120,6 @@ public class TransferActivity extends BaseActivity {
         tokenNum = token.getTokenNum();
         wallet = WalletManager.mustFindWalletById(walletId);
 
-        ethViewmodel = ViewModelProviders.of(this).get(EthViewmodel.class);
         mTransferViewModel = ViewModelProviders.of(this).get(TransferViewModel.class);
         mTransferViewModel.getGas(token).observe(this,this::onGetGas);
         mTransferViewModel.getEthTxResponse().observe(this,this::onCreateTrade);
@@ -132,6 +129,10 @@ public class TransferActivity extends BaseActivity {
         LogUtils.i(TAG,"初始值amountPrice: "+amountPrice.toString());
     }
 
+    /**
+     * 提交交易后
+     * @param tradeResponse
+     */
     private void onCreateTrade(TradeResponse tradeResponse) {
         if (tradeResponse == null) {
             ToastUtil.showToast("交易失败");
@@ -159,48 +160,17 @@ public class TransferActivity extends BaseActivity {
             gasLow = Convert.valueToGwei(dataBean.getMin());
             gasFastest = Convert.valueToGwei(dataBean.getMax());
             currentGasPrice = gasLow;
-            amountPrice = Convert.calGas(currentGasPrice,new BigDecimal(gasLimit));
-            tvGasCost.setText(amountPrice.toString()+ " eth");
-            tvGasPrice.setText(currentGasPrice.toString() + "gwei");
-            updateProgress(gasLow,gasFastest,currentGasPrice);
+            updateView();
         }
-    }
-
-    /**
-     * seekbar 更新
-     * @param low
-     * @param fast
-     * @param current
-     */
-    private void updateProgress(BigDecimal low,BigDecimal fast,BigDecimal current) {
-        seekbar.setMax(fast.intValue());
-        seekbar.setProgress(current.intValue());
     }
 
     @Override
     public void configViews() {
-        final DecimalFormat gasformater = new DecimalFormat();
-        //保留几位小数
-        gasformater.setMaximumFractionDigits(2);
-        //模式  四舍五入
-        gasformater.setRoundingMode(RoundingMode.CEILING);
-        final String etherUnit = getString(R.string.transfer_ether_unit);
-
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (fromUser){
-                    if (gasFastest.compareTo(new BigDecimal(0))==1){
-                        BigDecimal temp = gasFastest.multiply((new BigDecimal(progress)).divide(gasFastest,2,RoundingMode.CEILING));
-                        temp = temp.setScale(2,BigDecimal.ROUND_CEILING);
-                        if (temp.compareTo(gasLow)==-1){
-                            seekBar.setProgress(gasLow.intValue());
-                            ToastUtil.showToast("gwei值不能小于"+gasLow.toString());
-                        }else {
-                            currentGasPrice = temp;
-                            updateView();
-                        }
-                    }
+                    calculateGas(progress);
                 }
             }
             @Override
@@ -210,7 +180,7 @@ public class TransferActivity extends BaseActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
-        updateProgress(currentGasPrice,gasFastest,currentGasPrice);
+
         customGasPrice.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -222,6 +192,7 @@ public class TransferActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
             }
         });
+
         customGasLimit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -261,43 +232,34 @@ public class TransferActivity extends BaseActivity {
                 showTransInfoDialog();
                 break;
             case R.id.confirm_button:
-                InputPwdView pwdView = new InputPwdView(this, pwd -> {
-                    if (sendingTokens) {
-                    } else {
-                        LogUtils.i(TAG,"eth转账 输入密码：开始生成txtrans");
-//                        ethViewmodel.createTrans(
-//                                nonce,
-//                                Convert.gweiToWei(currentGasPrice),
-//                                new BigInteger(gasLimit.toString()),
-//                                etTransferAddress.getText().toString().trim(),
-//                                Convert.etherToWei(etAmount.getText().toString().trim()),
-//                                "",
-//                                "4",
-//                                pwd,
-//                                wallet
-//                        );
-                        mTransferViewModel.createEthTrans(
-                                nonce,
-                                Convert.gweiToWei(currentGasPrice),
-                                new BigInteger(gasLimit.toString()),
-                                etTransferAddress.getText().toString().trim(),
-                                Convert.etherToWei(etAmount.getText().toString().trim()),
-                                "",
-                                "4",
-                                pwd,
-                                wallet
-                        );
-                    }
-                });
-                dialog = new BottomSheetDialog(this);
-                dialog.setContentView(pwdView);
-                dialog.setCancelable(true);
-                dialog.setCanceledOnTouchOutside(true);
-                dialog.show();
+                PwdInputAlertDialog pwdDialog = new PwdInputAlertDialog(mContext);
+                pwdDialog.show();
+                pwdDialog.setOnOkClick(this::onTransConfirm);
                 break;
         }
     }
 
+    /**
+     * 密码输入确认转账
+     * @param pwd
+     */
+    private void onTransConfirm(String pwd) {
+        mTransferViewModel.createEthTrans(
+                nonce,
+                Convert.gweiToWei(currentGasPrice),
+                new BigInteger(gasLimit.toString()),
+                etTransferAddress.getText().toString().trim(),
+                Convert.etherToWei(etAmount.getText().toString().trim()),
+                "",
+                "4",
+                pwd,
+                wallet
+        );
+    }
+
+    /**
+     * 展示转账信息
+     */
     private void showTransInfoDialog() {
         if (!checkValue()){
             return;
@@ -335,11 +297,27 @@ public class TransferActivity extends BaseActivity {
         return true;
     }
 
+    /**
+     * 根据当前用户拖拽进度计算并更新当前矿工费
+     * @param progress
+     */
+    private void calculateGas(int progress) {
+        BigDecimal diff = gasFastest.subtract(gasLow).setScale(2,BigDecimal.ROUND_CEILING);
+
+        BigDecimal add = new BigDecimal(String.valueOf(progress))
+                        .divide(new BigDecimal(String.valueOf(100)),2,BigDecimal.ROUND_CEILING)
+                        .multiply(diff).setScale(2,BigDecimal.ROUND_CEILING);
+        currentGasPrice = gasLow.add(add);
+        updateView();
+    }
+
+    /**
+     * 更新当前gas总价和矿工费的显示
+     */
     private void updateView() {
         amountPrice = Convert.calGas(currentGasPrice,new BigDecimal(gasLimit));
-        tvGasCost.setText(amountPrice.toString()+ "ether");
+        tvGasCost.setText(amountPrice.toString()+ " ether");
         tvGasPrice.setText(currentGasPrice.toString() + "gwei");
-
     }
 }
 

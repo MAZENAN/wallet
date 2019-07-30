@@ -15,8 +15,9 @@ public class MnemonicBackupActivity extends BaseActivity {
 
     @BindView(R.id.tv_mnemonic)
     TextView tvMnemonic;
-    @BindView(R.id.btn_next)
-    TextView tvNext;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+
     @Override
     protected void onBeforeSetContentLayout() {
 
@@ -29,7 +30,7 @@ public class MnemonicBackupActivity extends BaseActivity {
 
     @Override
     public void initToolBar() {
-
+        tvTitle.setText("助记词");
     }
 
     @Override

@@ -3,6 +3,8 @@ package cn.part.wallet.ui.activity;
 import android.view.View;
 import android.widget.Button;
 
+import com.gyf.barlibrary.ImmersionBar;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.part.wallet.R;

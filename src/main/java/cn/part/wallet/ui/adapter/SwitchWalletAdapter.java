@@ -1,5 +1,6 @@
 package cn.part.wallet.ui.adapter;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.consenlabs.tokencore.wallet.Wallet;
+import org.consenlabs.tokencore.wallet.model.ChainType;
 
 import java.util.List;
 
@@ -18,9 +20,11 @@ import cn.part.wallet.R;
 public class SwitchWalletAdapter extends RecyclerView.Adapter<SwitchWalletAdapter.WalletHolder> {
     private List<Wallet> mList;
     private WalletClickListener mListener;
+    private Context mContext;
 
-    public SwitchWalletAdapter(List<Wallet> list){
+    public SwitchWalletAdapter(Context context,List<Wallet> list){
         mList = list;
+        mContext = context;
     }
     @NonNull
     @Override
@@ -33,7 +37,14 @@ public class SwitchWalletAdapter extends RecyclerView.Adapter<SwitchWalletAdapte
     public void onBindViewHolder(@NonNull WalletHolder walletHolder, int i) {
         Wallet wallet = mList.get(i);
         walletHolder.tvWalletAddr.setText(wallet.getAddress());
-        //TODO 设置icon
+        switch (wallet.getMetadata().getChainType()) {
+            case ChainType.ETHEREUM:
+                walletHolder.imgIcon.setImageDrawable(mContext.getDrawable(R.drawable.eth));
+                break;
+            case ChainType.BITCOIN:
+                walletHolder.imgIcon.setImageDrawable(mContext.getDrawable(R.drawable.btc));
+                break;
+        }
         if (mListener!=null){
             walletHolder.rootview.setOnClickListener((view)->{
                 mListener.itemClick(walletHolder.rootview,wallet);

@@ -1,9 +1,13 @@
 <resources>
-    <string name="app_name">拍档钱包</string>
+    <string name="app_name">wallet</string>
     <string name="exit_tips">再按一次退出程序</string>
+
+    <string name="guide_text1">创建你的</string>
+    <string name="guide_text2">第一个数字身份</string>
 
     <string name="btn_guide_create">创建身份</string>
     <string name="btn_guide_recovery">恢复身份</string>
+    <string name="create_identity_name_input_tips">请输入身份名称</string>
 
     <string name="create_wallet_alert1">* 密码用于隐私保护和交易授权，强度非常重要</string>
     <string name="create_wallet_alert2">* 钱包不存储密码秘钥，也无法帮您找回，请务必牢记</string>
@@ -17,14 +21,16 @@
 
     <string name="create_wallet_name_repeat_tips">钱包名称重复</string>
     <string name="create_wallet_name_input_tips">请输入钱包名称</string>
+
     <string name="create_wallet_pwd_input_tips">密码不能为空</string>
     <string name="create_wallet_pwdconfirm_input_tips">确认密码不能为空</string>
     <string name="create_wallet_pwd_confirm_input_tips">密码不一致，请重新输入</string>
 
     <string name="news_center_all_read">全部已读</string>
 
-    <string name="wallet_backup_tips1">最后一步：立即备份你的钱包！</string>
-    <string name="wallet_backup_tips2">备份钱包：导出「助记词」并抄写到安全的地方，千万不要保存到网络上，然后尝试转入、转出小额资产开始使用.</string>
+    <string name="wallet_backup_tips1">最后一步</string>
+    <string name="wallet_backup_tips2">立即备份你的钱包！</string>
+    <string name="wallet_backup_tips3">备份钱包：导出「助记词」并抄写到安全的地方，千万不要保存到网络上，然后尝试转入、转出小额资产开始使用.</string>
     <string name="wallet_backup_backup_btn">下一步</string>
     <string name="wallet_backup_skip_btn">跳过</string>
     <string name="wallet_backup_backup_help">查看备份详细教程</string>
@@ -74,7 +80,7 @@
     <string name="transfer_address">收款人钱包地址</string>
     <string name="transfer_money">转账金额</string>
     <string name="transfer_remark">备注</string>
-    <string name="transfer_gas_cost">矿工费用</string>
+    <string name="transfer_gas_cost">矿工费用：</string>
     <string name="transfer_gas_price">自定义 Gas Price</string>
     <string name="transfer_gas">自定义 Gas</string>
     <string name="transfer_advanced_setting">高级选项</string>
@@ -166,4 +172,9 @@
     <string name="mine_into_about">关于我们</string>
     <string name="mine_backup">备份身份</string>
     <string name="mine_quit">退出当前身份</string>
+
+    <string name="dialog_title">密码输入</string>
+    <string name="dialog_cancle">取消</string>
+    <string name="dialog_ok">确定</string>
+    <string name="dialog_input_hint">请输入您的密码</string>
 </resources>

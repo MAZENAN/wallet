@@ -13,7 +13,6 @@ import java.util.List;
 
 import cn.part.wallet.R;
 import cn.part.wallet.entity.TransInfo;
-import cn.part.wallet.service.response.EthTxInfo;
 import cn.part.wallet.utils.Convert;
 
 public class EthTxAdapter extends RecyclerView.Adapter<EthTxAdapter.TxHolder> {
@@ -34,7 +33,7 @@ public class EthTxAdapter extends RecyclerView.Adapter<EthTxAdapter.TxHolder> {
     @NonNull
     @Override
     public TxHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View viewTx = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item_transaction, viewGroup, false);
+        View viewTx = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_transaction, viewGroup, false);
         TxHolder holder = new TxHolder(viewTx);
         return holder;
     }

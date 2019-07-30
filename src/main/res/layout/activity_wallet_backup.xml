@@ -1,59 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical">
     <include layout="@layout/common_toolbar_with_txbtn" />
-
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp" />
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center_vertical">
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
         android:text="@string/wallet_backup_tips1"
-        android:textColor="@color/discovery_application_text_color"
-        android:textSize="18sp" />
-
+        android:textSize="24sp"
+        android:textColor="@color/global_black"
+        android:gravity="center"/>
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="30dp"
         android:text="@string/wallet_backup_tips2"
-        android:textColor="@color/property_ico_worth_color"
-        android:textSize="13sp" />
-
+        android:textSize="24sp"
+        android:textColor="@color/global_black"
+        android:gravity="center"/>
     <TextView
-        android:id="@+id/btn_backup"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:gravity="center|left"
+        android:layout_gravity="center"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="30dp"
-        android:background="@color/transfer_advanced_setting_help_text_color"
-        android:gravity="center"
+        android:layout_marginTop="@dimen/dp_15"
+        android:text="@string/wallet_backup_tips3"
+        android:textColor="#FF999999"
+        android:textSize="@dimen/sp_14" />
+    <Button
+        android:id="@+id/btn_backup"
         android:text="@string/wallet_backup_backup_btn"
-        android:textColor="@color/white"
-        android:textSize="13sp" />
-
-    <TextView
-        android:id="@+id/btn_backup_help"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:text="@string/wallet_backup_backup_help"
-        android:textColor="@color/transfer_advanced_setting_help_text_color"
-        android:textSize="12sp"
-        android:visibility="gone"/>
-
+        style="@style/button_red"/>
 </LinearLayout>
+</FrameLayout>

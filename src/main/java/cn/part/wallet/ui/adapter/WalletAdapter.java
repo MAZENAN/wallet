@@ -54,12 +54,12 @@ public class WalletAdapter extends RecyclerView.Adapter<WalletAdapter.WalletHold
     static class WalletHolder extends RecyclerView.ViewHolder {
         TextView tvWalletName;
         TextView tvWalletAddr;
-        CardView rootview;
+        View rootview;
         WalletHolder(@NonNull View itemView) {
             super(itemView);
             tvWalletName = itemView.findViewById(R.id.tv_wallet_name);
             tvWalletAddr = itemView.findViewById(R.id.tv_wallet_addr);
-            rootview = itemView.findViewById(R.id.item_view);
+            rootview = itemView;
         }
     }
 

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#0000">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/radius_10_card"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="6dp"
+            android:textSize="22sp"
+            android:text="@string/dialog_title"
+            android:textColor="#AF00"/>
+
+        <EditText
+            android:id="@+id/dialog_pay_pwd_et_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:inputType="textPassword"
+            android:gravity="center"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:background="@drawable/radius_10_card"
+            android:hint="@string/dialog_input_hint"
+            android:textColor="#6000"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#C0C0C0"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/dialog_pay_pwd_tv_cancel"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/dialog_cancle" />
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="wrap_content"
+                android:background="#C0C0C0"/>
+            <TextView
+                android:id="@+id/dialog_pay_pwd_tv_ok"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:textColor="#AF00"
+                android:layout_gravity="center"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/dialog_ok"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

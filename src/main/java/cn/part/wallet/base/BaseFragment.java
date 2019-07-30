@@ -17,6 +17,7 @@ package cn.part.wallet.base;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -181,6 +182,10 @@ public abstract class BaseFragment extends Fragment {
         return view.getVisibility() == View.VISIBLE;
     }
 
-
-
+    public void launchActivity(Class<?> activity) {
+        if(mContext!=null){
+            Intent intent = new Intent(mContext, activity);
+            mContext.startActivity(intent);
+        }
+    }
 }

@@ -2,33 +2,27 @@ package cn.part.wallet.base;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-
 import com.gyf.barlibrary.ImmersionBar;
-
-import org.consenlabs.tokencore.wallet.WalletManager;
-
-import java.io.File;
-
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.part.wallet.R;
 import cn.part.wallet.view.loading.CustomDialog;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
     public Toolbar mCommonToolbar;
-
     protected Context mContext;
-    private CustomDialog dialog;//进度条
     private Unbinder unbinder;
-
     protected final String TAG = getClass().getSimpleName();
+    private SweetAlertDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,34 +109,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         return view.getVisibility() == View.VISIBLE;
     }
 
-    // dialog
-    public CustomDialog getDialog() {
-        if (dialog == null) {
-            dialog = CustomDialog.instance(this);
-            dialog.setCancelable(true);
-        }
-        return dialog;
-    }
-
-    public void hideDialog() {
-        if (dialog != null)
-            dialog.hide();
-    }
-
-    public void showDialog(String progressTip) {
-        getDialog().show();
-        if (progressTip != null) {
-            getDialog().setTvProgress(progressTip);
-        }
-    }
-
-    public void dismissDialog() {
-        if (dialog != null) {
-            dialog.dismiss();
-            dialog = null;
-        }
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -159,4 +125,34 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     }
 
+    public SweetAlertDialog getpDialog(){
+        if (pDialog == null){
+            pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+            pDialog.getProgressHelper().setBarColor(Color.parseColor("#FFFF5454"));
+            pDialog.setCancelable(false);
+        }
+        return pDialog;
+    }
+
+    public void showDialog(String title) {
+        if (!title.isEmpty()){
+            getpDialog().setTitleText(title);
+            getpDialog().show();
+        }
+    }
+
+    public void dismissDialog() {
+        if (pDialog != null) {
+            pDialog.dismiss();
+            pDialog = null;
+        }
+    }
+
+    public void switchDialog(Boolean bool,String tips) {
+        if (bool) {
+            showDialog(tips);
+        }else {
+            dismissDialog();
+        }
+    }
 }

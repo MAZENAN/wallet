@@ -3,7 +3,6 @@ package cn.part.wallet.ui.activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.part.wallet.R;
@@ -37,8 +36,6 @@ public class WalletBackUpActivity extends BaseActivity {
     public void initDatas() {
         Intent intent = getIntent();
         walletMnemonic = intent.getStringExtra("EthereumMnemonic");
-        String bitcoinMnemonic = intent.getStringExtra("BitcoinMnemonic");
-        ToastUtil.showToast(walletMnemonic);
     }
 
     @Override

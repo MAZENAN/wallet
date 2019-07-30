@@ -56,11 +56,11 @@ public class ProperyDetailActivity extends BaseActivity {
         LogUtils.i(TAG,token.getTokenName());
         detailViewModel = ViewModelProviders.of(this).get(PropertyDetailViewModel.class);
 
-        txlistAdapter = new TxlistAdapter(new ArrayList<>());
+        txlistAdapter = new TxlistAdapter(mContext,new ArrayList<>());
         txlistAdapter.setListener(this::onTxitemClick);
 
         detailViewModel.getETxList(token).observe(this,this::onTxListGet);
-        detailViewModel.getLoadind().observe(this,this::onLoading);
+        detailViewModel.getLoading().observe(this,this::onLoading);
     }
 
     private void onTxListGet(List<TxInfo> txInfos) {
