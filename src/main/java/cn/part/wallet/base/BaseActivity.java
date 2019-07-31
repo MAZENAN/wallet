@@ -13,7 +13,6 @@ import com.gyf.barlibrary.ImmersionBar;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.part.wallet.R;
-import cn.part.wallet.view.loading.CustomDialog;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public abstract class BaseActivity extends AppCompatActivity {

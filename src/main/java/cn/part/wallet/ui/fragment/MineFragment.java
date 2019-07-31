@@ -1,10 +1,11 @@
 package cn.part.wallet.ui.fragment;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 import org.consenlabs.tokencore.wallet.Identity;
-import org.consenlabs.tokencore.wallet.model.TokenException;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.part.wallet.R;
@@ -15,10 +16,12 @@ import cn.part.wallet.ui.activity.IdentityActivity;
 import cn.part.wallet.ui.activity.WalletListActivity;
 import cn.part.wallet.utils.ToastUtil;
 import cn.part.wallet.view.PwdInputAlertDialog;
+import cn.part.wallet.viewmodel.GlobalOpViewModel;
 
 public class MineFragment extends BaseFragment {
     @BindView(R.id.tv_identity_name)
     TextView tvIdentityName;
+    GlobalOpViewModel mViewModel;
 
     @Override
     public int getLayoutResId() {
@@ -29,7 +32,25 @@ public class MineFragment extends BaseFragment {
     public void attachView() { }
 
     @Override
-    public void initDatas() { }
+    public void initDatas() {
+        mViewModel = ViewModelProviders.of(this).get(GlobalOpViewModel.class);
+        mViewModel.getLoadingData().observe(this,this::onLoading);
+        mViewModel.getDeleteResultData().observe(this,this::onQuitIdentity);
+    }
+
+    private void onQuitIdentity(Boolean bool) {
+        if (bool) {
+            Intent intent = new Intent(mContext, GuideActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            mContext.startActivity(intent);
+        }else {
+            ToastUtil.showToast("密码错误");
+        }
+    }
+
+    private void onLoading(Boolean bool) {
+        switchDialog(bool,"正在退出...");
+    }
 
     @Override
     public void configViews() {
@@ -38,7 +59,6 @@ public class MineFragment extends BaseFragment {
 
     @OnClick({R.id.tv_identity_name,R.id.rl_wallet_manage,R.id.rl_address_manage,R.id.tv_quit_identity})
     public void onClick(View view) {
-        Intent intent = null;
         switch (view.getId()) {
             case R.id.tv_identity_name:
                 launchActivity(IdentityActivity.class);
@@ -47,26 +67,22 @@ public class MineFragment extends BaseFragment {
                 launchActivity(WalletListActivity.class);
                 break;
             case R.id.rl_address_manage:
-                launchActivity(AddressListActivity.class);
+               // launchActivity(AddressListActivity.class);
                 break;
             case R.id.tv_quit_identity:
-                quitCurrentIdentity();
+                showPwdInputDialog();
                 break;
         }
     }
 
-    private void quitCurrentIdentity() {
+    /**
+     * 退出身份弹框
+     */
+    private void showPwdInputDialog() {
         PwdInputAlertDialog dialog = new PwdInputAlertDialog(mContext);
         dialog.setOnOkClick((pwd)->{
-            try {
-                Identity identity = Identity.getCurrentIdentity();
-                identity.deleteIdentity(pwd);
-                Intent intent = new Intent(mContext, GuideActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                mContext.startActivity(intent);
-            }catch (TokenException e){
-                ToastUtil.showToast("密码错误");
-            }
+            dialog.dismiss();
+            mViewModel.postDeleteIdentity(pwd);
         });
         dialog.show();
     }

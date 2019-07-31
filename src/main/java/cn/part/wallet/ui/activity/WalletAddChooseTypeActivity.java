@@ -42,16 +42,16 @@ public class WalletAddChooseTypeActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.ll_wallet_eth,R.id.ll_wallet_btc,R.id.ll_wallet_eos})
+    @OnClick({R.id.rl_wallet_eth,R.id.rl_wallet_btc,R.id.rl_wallet_eos})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.ll_wallet_eth:
+            case R.id.rl_wallet_eth:
                 showPopWindow(ChainType.ETHEREUM);
                 break;
-            case R.id.ll_wallet_btc:
+            case R.id.rl_wallet_btc:
                 showPopWindow(ChainType.BITCOIN);
                 break;
-            case R.id.ll_wallet_eos:
+            case R.id.rl_wallet_eos:
                 showPopWindow(ChainType.EOS);
                 break;
         }

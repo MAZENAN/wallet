@@ -85,4 +85,14 @@ public class Convert {
     public static BigInteger gweiToWei(BigDecimal gwei) {
        return gwei.multiply(new BigDecimal(10).pow(9)).toBigInteger();
     }
+
+    //聪换算成btc
+    public static BigDecimal satoshiToBTC(long sato) {
+        return BigDecimal.valueOf(sato).multiply(BigDecimal.valueOf(0.00000001)).setScale(8,BigDecimal.ROUND_CEILING);
+    }
+
+    //btc换算成聪
+    public static long BTCToSatoshi(BigDecimal btc) {
+        return btc.multiply(BigDecimal.valueOf(100000000)).longValue();
+    }
 }

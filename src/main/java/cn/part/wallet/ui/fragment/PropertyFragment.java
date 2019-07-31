@@ -176,7 +176,7 @@ public class PropertyFragment extends BaseFragment {
                 break;
             case ChainType.BITCOIN:
                 list.add(new Token("BTC",new BigDecimal("0"),new BigDecimal("0"),currentWallet.getAddress(),"",ChainType.BITCOIN,false));
-                list.add(new Token("USDT",new BigDecimal("0"),new BigDecimal("0"),currentWallet.getAddress(),"",ChainType.BITCOIN,true));
+//                list.add(new Token("USDT",new BigDecimal("0"),new BigDecimal("0"),currentWallet.getAddress(),"",ChainType.BITCOIN,true));
                 break;
         }
     }

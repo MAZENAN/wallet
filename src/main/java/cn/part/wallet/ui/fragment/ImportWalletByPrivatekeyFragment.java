@@ -144,7 +144,7 @@ public class ImportWalletByPrivatekeyFragment extends NoBarBaseFragment {
 //        new Metadata(ChainType.ETHEREUM, Network.MAINNET, "name", "passwordHint");
         Metadata metadata = new Metadata();
         metadata.setChainType(walletType);
-        metadata.setNetwork(Network.MAINNET);
+        metadata.setNetwork(Network.TESTNET);
         metadata.setName("import-"+walletType);
         metadata.setPasswordHint(hint);
         WalletManager.importWalletFromPrivateKey(metadata,privateKey,pass,true);

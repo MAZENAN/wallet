@@ -4,7 +4,7 @@
     android:id="@+id/scanner_toolsbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="?attr/colorPrimary"
+    android:background="@color/transparent"
     android:minHeight="?attr/actionBarSize"
     android:theme="@style/Theme.ToolBar.Menu"
     app:contentInsetStart="0dp">
@@ -37,7 +37,7 @@
             <ImageView
                 android:layout_width="9dp"
                 android:layout_height="16dp"
-                android:src="@drawable/ic_back_white" />
+                android:src="@drawable/ic_back_white"/>
 
         </LinearLayout>
 

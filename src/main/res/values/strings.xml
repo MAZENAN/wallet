@@ -81,6 +81,7 @@
     <string name="transfer_money">转账金额</string>
     <string name="transfer_remark">备注</string>
     <string name="transfer_gas_cost">矿工费用：</string>
+    <string name="transfer_sat_price">自定义矿工费用</string>
     <string name="transfer_gas_price">自定义 Gas Price</string>
     <string name="transfer_gas">自定义 Gas</string>
     <string name="transfer_advanced_setting">高级选项</string>

@@ -59,7 +59,7 @@
                 android:layout_height="42dp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_18"
-                android:text="128.23"
+                android:text="0.00 ￥"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:id="@+id/tv_wallet_main_balance"

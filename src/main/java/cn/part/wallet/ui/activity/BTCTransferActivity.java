@@ -1,10 +1,8 @@
 package cn.part.wallet.ui.activity;
 
 import android.app.Dialog;
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,13 +15,12 @@ import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import org.consenlabs.tokencore.wallet.Identity;
 import org.consenlabs.tokencore.wallet.Wallet;
 import org.consenlabs.tokencore.wallet.WalletManager;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
+
 import butterknife.BindView;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
@@ -35,13 +32,11 @@ import cn.part.wallet.service.response.TradeResponse;
 import cn.part.wallet.utils.Convert;
 import cn.part.wallet.utils.LogUtils;
 import cn.part.wallet.utils.ToastUtil;
-import cn.part.wallet.view.InputPwdView;
 import cn.part.wallet.view.PwdInputAlertDialog;
 import cn.part.wallet.view.TransactionPreView;
-import cn.part.wallet.viewmodel.EthViewmodel;
 import cn.part.wallet.viewmodel.TransferViewModel;
 
-public class TransferActivity extends BaseActivity {
+public class BTCTransferActivity extends BaseActivity {
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.iv_btn)
@@ -66,8 +61,6 @@ public class TransferActivity extends BaseActivity {
     Switch advancedSwitch;
     @BindView(R.id.custom_gas_price)
     EditText customGasPrice;
-    @BindView(R.id.custom_gas_limit)
-    EditText customGasLimit;
 
     private String walletAddr;
     private String contractAddress;
@@ -99,7 +92,7 @@ public class TransferActivity extends BaseActivity {
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_transfer;
+        return R.layout.activity_btc_transfer;
     }
 
     @Override
@@ -127,6 +120,7 @@ public class TransferActivity extends BaseActivity {
         tvTitle.setText(symbol + getString(R.string.transfer_title));
         amountPrice = Convert.calGas(currentGasPrice,new BigDecimal(gasLimit));
         LogUtils.i(TAG,"初始值amountPrice: "+amountPrice.toString());
+        LogUtils.i(TAG,"当前钱包为"+wallet.getAddress());
     }
 
     /**
@@ -156,11 +150,11 @@ public class TransferActivity extends BaseActivity {
             LogUtils.i(TAG,"gas max"+dataBean.getMax());
             LogUtils.i(TAG,"gas min"+dataBean.getMin());
             LogUtils.i(TAG,"nonce"+dataBean.getMin());
-            nonce = new BigInteger(dataBean.getNum().substring(2),16);
-            gasLow = Convert.valueToGwei(dataBean.getMin());
-            gasFastest = Convert.valueToGwei(dataBean.getMax());
-            currentGasPrice = gasLow;
-            updateView();
+//            nonce = new BigInteger(dataBean.getNum().substring(2),16);
+//            gasLow = Convert.valueToGwei(dataBean.getMin());
+//            gasFastest = Convert.valueToGwei(dataBean.getMax());
+//            currentGasPrice = gasLow;
+//            updateView();
         }
     }
 
@@ -193,17 +187,6 @@ public class TransferActivity extends BaseActivity {
             }
         });
 
-        customGasLimit.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
         tvTitle.setText(token.getTokenName()+"转账");
     }
 
@@ -244,17 +227,19 @@ public class TransferActivity extends BaseActivity {
      * @param pwd
      */
     private void onTransConfirm(String pwd) {
-        mTransferViewModel.createEthTrans(
-                nonce,
-                Convert.gweiToWei(currentGasPrice),
-                new BigInteger(gasLimit.toString()),
-                etTransferAddress.getText().toString().trim(),
-                Convert.etherToWei(etAmount.getText().toString().trim()),
-                "",
-                "4",
-                pwd,
-                wallet
-        );
+//        mTransferViewModel.createEthTrans(
+//                nonce,
+//                Convert.gweiToWei(currentGasPrice),
+//                new BigInteger(gasLimit.toString()),
+//                etTransferAddress.getText().toString().trim(),
+//                Convert.etherToWei(etAmount.getText().toString().trim()),
+//                "",
+//                "4",
+//                pwd,
+//                wallet
+//        );
+
+        mTransferViewModel.createBtcTrans("",123,12,pwd,wallet);
     }
 
     /**
@@ -316,8 +301,8 @@ public class TransferActivity extends BaseActivity {
      */
     private void updateView() {
         amountPrice = Convert.calGas(currentGasPrice,new BigDecimal(gasLimit));
-        tvGasCost.setText(amountPrice.toString()+ " ether");
-        tvGasPrice.setText(currentGasPrice.toString() + "gwei");
+        tvGasCost.setText(amountPrice.toString()+ " btc");
+        tvGasPrice.setText(currentGasPrice.toString() + " sat/b");
     }
 }
 

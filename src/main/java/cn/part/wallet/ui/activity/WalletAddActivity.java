@@ -1,30 +1,22 @@
 package cn.part.wallet.ui.activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import org.consenlabs.tokencore.foundation.utils.MnemonicUtil;
 import org.consenlabs.tokencore.wallet.Identity;
 import org.consenlabs.tokencore.wallet.Wallet;
-import org.consenlabs.tokencore.wallet.WalletManager;
 import org.consenlabs.tokencore.wallet.keystore.EOSKeystore;
 import org.consenlabs.tokencore.wallet.keystore.HDMnemonicKeystore;
 import org.consenlabs.tokencore.wallet.keystore.IMTKeystore;
-import org.consenlabs.tokencore.wallet.keystore.V3Keystore;
 import org.consenlabs.tokencore.wallet.keystore.V3MnemonicKeystore;
 import org.consenlabs.tokencore.wallet.model.BIP44Util;
 import org.consenlabs.tokencore.wallet.model.ChainType;
 import org.consenlabs.tokencore.wallet.model.Metadata;
-import org.consenlabs.tokencore.wallet.model.MnemonicAndPath;
-import org.consenlabs.tokencore.wallet.model.Network;
-
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
@@ -208,43 +200,5 @@ public class WalletAddActivity extends BaseActivity {
         Wallet wallet = new Wallet(keystore);
         identity.addWallet(wallet);
 
-//        if (null != identity) {
-//            Wallet ethereumWallet = identity.getWallets().get(0);
-//            if (null != ethereumWallet) {
-//                String ethereumId = ethereumWallet.getId();
-//                MnemonicAndPath ethereumMnemonic = WalletManager.exportMnemonic(ethereumId, passwd);
-//                LogUtils.i(TAG,ethereumMnemonic.getMnemonic());
-//                SharedPreferences.Editor editor = getSharedPreferences("default_wallet", MODE_PRIVATE).edit();
-//                editor.putString("current_wallet_id", ethereumWallet.getId());
-//                editor.commit();
-//                MyThreadPool.runOnUiThread(()->{
-//                    getDialog().showSuccess();
-//                    showDialog("创建成功");
-//                    MyThreadPool.runOnUiThreadDelayed(()->{
-//                        hideDialog();
-//                        Intent intent = new Intent(mContext, WalletBackUpActivity.class);
-//                        intent.putExtra("EthereumMnemonic", ethereumMnemonic.getMnemonic());
-//                        startActivity(intent);
-//                    },1000);
-//                });
-//            } else {
-//                MyThreadPool.runOnUiThread(()->{
-//                            getDialog().showFail();
-//                            showDialog("获取钱包失败");
-//                            MyThreadPool.runOnUiThreadDelayed(()->{
-//                                hideDialog(); },1000);
-//                        }
-//                );
-//            }
-//        } else {
-//            MyThreadPool.runOnUiThread(()->{
-//                        getDialog().showFail();
-//                        showDialog("创建钱包失败");
-//                        MyThreadPool.runOnUiThreadDelayed(()->{
-//                            hideDialog(); },1000
-//                        );
-//                    }
-//            );
-//        }
     }
 }

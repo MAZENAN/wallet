@@ -37,6 +37,7 @@ import cn.part.wallet.R;
 import cn.part.wallet.entity.WalletInfo;
 import cn.part.wallet.utils.LogUtils;
 import cn.part.wallet.view.loading.CustomDialog;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public abstract class BaseFragment extends Fragment {
 
@@ -45,10 +46,9 @@ public abstract class BaseFragment extends Fragment {
     protected LayoutInflater inflater;
 
     protected Context mContext;
-
-    private CustomDialog dialog;
     private Unbinder unbinder;
     Toolbar toolbar;
+    private SweetAlertDialog pDialog;
 
     public abstract
     @LayoutRes
@@ -130,32 +130,6 @@ public abstract class BaseFragment extends Fragment {
         return parentView;
     }
 
-    public CustomDialog getDialog() {
-        if (dialog == null) {
-            dialog = CustomDialog.instance(getActivity());
-            dialog.setCancelable(false);
-        }
-        return dialog;
-    }
-
-    public void hideDialog() {
-        if (dialog != null)
-            dialog.hide();
-    }
-
-    public void showDialog(String progressTip) {
-        getDialog().show();
-        if (progressTip != null) {
-            getDialog().setTvProgress(progressTip);
-        }
-    }
-
-    public void dismissDialog() {
-        if (dialog != null) {
-            dialog.dismiss();
-            dialog = null;
-        }
-    }
 
     protected void gone(final View... views) {
         if (views != null && views.length > 0) {
@@ -186,6 +160,38 @@ public abstract class BaseFragment extends Fragment {
         if(mContext!=null){
             Intent intent = new Intent(mContext, activity);
             mContext.startActivity(intent);
+        }
+    }
+
+
+    public SweetAlertDialog getpDialog(){
+        if (pDialog == null){
+            pDialog = new SweetAlertDialog(mContext, SweetAlertDialog.PROGRESS_TYPE);
+            pDialog.getProgressHelper().setBarColor(Color.parseColor("#FFFF5454"));
+            pDialog.setCancelable(false);
+        }
+        return pDialog;
+    }
+
+    public void showDialog(String title) {
+        if (!title.isEmpty()){
+            getpDialog().setTitleText(title);
+            getpDialog().show();
+        }
+    }
+
+    public void dismissDialog() {
+        if (pDialog != null) {
+            pDialog.dismiss();
+            pDialog = null;
+        }
+    }
+
+    public void switchDialog(Boolean bool,String tips) {
+        if (bool) {
+            showDialog(tips);
+        }else {
+            dismissDialog();
         }
     }
 }

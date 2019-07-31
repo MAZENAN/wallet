@@ -49,7 +49,9 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.ProperyDetailActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.TransferActivity"
+        <activity android:name=".ui.activity.ETHTransferActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.BTCTransferActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.TxDetailActivity"
             android:screenOrientation="portrait"/>

@@ -86,8 +86,8 @@ public class ProperyDetailActivity extends BaseActivity {
         rcTxList.setAdapter(txlistAdapter);
         refreshLayout.setOnRefreshListener(this::onRefresh);
 
-        tvTitle.setText(token.getTokenName());
-        if (token.getType().equals(ChainType.BITCOIN)){
+        tvTitle.setText(token.getTokenName()+ " 资产明细");
+        if (token.getType().equals(ChainType.EOS)){
             llyTransfer.setEnabled(false);
         }
     }
@@ -98,14 +98,22 @@ public class ProperyDetailActivity extends BaseActivity {
 
     @OnClick({R.id.lly_transfer})
     public void onClick(View view) {
-        Intent intent = null;
-        switch (view.getId()) {
-            case R.id.lly_transfer:
-                intent = new Intent(mContext,TransferActivity.class);
-                intent.putExtra("token",token);
-                intent.putExtra("wallet_id",walletId);
+        if (view.getId() == R.id.lly_transfer) {
+            Intent intent = null;
+            switch (token.getType()) {
+                case ChainType.ETHEREUM:
+                    intent = new Intent(mContext, ETHTransferActivity.class);
+                    break;
+                case ChainType.BITCOIN:
+                    intent = new Intent(mContext, BTCTransferActivity.class);
+                    break;
+            }
+            if (intent != null) {
+                intent.putExtra("token", token);
+                intent.putExtra("wallet_id", walletId);
                 startActivity(intent);
-                break;
+            }
+
         }
     }
 }
