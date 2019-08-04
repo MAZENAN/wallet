@@ -69,5 +69,9 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.AddressAddActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.SettingActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.CoinSettingActivity"/>
+        <activity android:name=".ui.activity.NetSettingActivity"/>
     </application>
 </manifest>

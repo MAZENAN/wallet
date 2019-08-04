@@ -22,10 +22,7 @@ import cn.part.wallet.base.BaseActivity;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
-/**
- * Created by Tiny 熊 @ Upchain.pro
- * WeiXin: xlbxiong
- */
+
 
 
 public class QRCodeScannerActivity extends BaseActivity implements  EasyPermissions.PermissionCallbacks,  View.OnClickListener, QRCodeView.Delegate {

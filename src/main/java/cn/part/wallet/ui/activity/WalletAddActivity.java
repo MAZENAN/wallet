@@ -108,7 +108,7 @@ public class WalletAddActivity extends BaseActivity {
                 boolean res = checkInput();
                 if (res){
                     //getDialog().showLoadind();
-                    showDialog("正在创建钱包...");
+                    showMyDialog("正在创建钱包...");
                     MyThreadPool.execute(()->{
                         try{
                             LogUtils.e(TAG,"开始创建钱包");

@@ -15,9 +15,10 @@ import java.io.File;
 public class WalletApp extends MultiDexApplication  implements KeystoreStorage {
 
     private static WalletApp sInstance;
+    private static Context mContext;
 
 
-    private static OkHttpClient httpClient;
+    //private static OkHttpClient httpClient;
 
 
     @Override
@@ -34,15 +35,20 @@ public class WalletApp extends MultiDexApplication  implements KeystoreStorage {
     }
 
     protected void init() {
+        mContext = getApplicationContext();
         WalletManager.storage = this;
         WalletManager.scanWallets();
         LitePal.initialize(this);
     }
 
-
-    public static OkHttpClient okHttpClient() {
-        return httpClient;
+    public static Context getContext() {
+        return mContext;
     }
+
+
+//    public static OkHttpClient okHttpClient() {
+//        return httpClient;
+//    }
 
 
     @Override

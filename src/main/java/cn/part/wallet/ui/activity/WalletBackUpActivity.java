@@ -12,8 +12,6 @@ import cn.part.wallet.utils.ToastUtil;
 public class WalletBackUpActivity extends BaseActivity {
     @BindView(R.id.tv_title)
     TextView tvTitle;
-    @BindView(R.id.iv_btn)
-    TextView btnSkip;
     @BindView(R.id.btn_backup)
     TextView btnBackup;
     String walletMnemonic = "";
@@ -29,7 +27,7 @@ public class WalletBackUpActivity extends BaseActivity {
 
     @Override
     public void initToolBar() {
-        tvTitle.setText("备份提示");
+        tvTitle.setText(R.string.title_backup);
     }
 
     @Override
@@ -40,7 +38,6 @@ public class WalletBackUpActivity extends BaseActivity {
 
     @Override
     public void configViews() {
-        btnSkip.setText("跳过");
     }
 
     @OnClick(R.id.btn_backup)

@@ -94,6 +94,7 @@
                 style="@style/mine_left_text"
                 android:text="@string/mine_identity_id"/>
             <TextView
+                android:id="@+id/tv_identity_id"
                 android:layout_width="195dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -132,10 +133,25 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:id="@+id/rl_address_manage">
+            android:id="@+id/rl_setting">
             <TextView
                 style="@style/mine_left_text_into"
                 android:text="@string/mine_into_setting"/>
+            <ImageView
+                style="@style/mine_into_icon"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/mine_line"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/rl_address_manage">
+            <TextView
+                style="@style/mine_left_text_into"
+                android:text="@string/mine_into_address"/>
             <ImageView
                 style="@style/mine_into_icon"/>
             <View

@@ -66,7 +66,7 @@ public class WalletRepository {
     }
 
     private void callGetTxlist(MutableLiveData<List<TxInfo>> data,Token token) {
-        Call<TxList> txCall = iWalletService.getHistory(Util.chainTypeDesc(token.getType()),token.getAddress(),IWalletApi.NET_TEST);
+        Call<TxList> txCall = iWalletService.getHistory(Util.chainTypeDesc(token.getType()),token.getAddress(),Util.getNetEnv());
         txCall.enqueue(new Callback<TxList>() {
             @Override
             public void onResponse(Call<TxList> call, Response<TxList> response) {
@@ -89,7 +89,7 @@ public class WalletRepository {
 
     public MutableLiveData<Gasinfo.DataBean> getGas(Token token) {
         final MutableLiveData<Gasinfo.DataBean> data = new MutableLiveData<>();
-        iWalletService.getFee(Util.chainTypeDesc(token.getType()),token.getAddress(),IWalletApi.NET_TEST).enqueue(new Callback<Gasinfo>() {
+        iWalletService.getFee(Util.chainTypeDesc(token.getType()),token.getAddress(),Util.getNetEnv()).enqueue(new Callback<Gasinfo>() {
             @Override
             public void onResponse(Call<Gasinfo> call, Response<Gasinfo> response) {
                 if (response.body().getStatus()==200) {
@@ -109,7 +109,7 @@ public class WalletRepository {
     }
 
     public void sendTrans (MutableLiveData<TradeResponse> data,String type,String hex){
-            iWalletService.sendTrans(Util.chainTypeDesc(type),hex,IWalletApi.NET_TEST).enqueue(new Callback<TradeResponse>() {
+            iWalletService.sendTrans(Util.chainTypeDesc(type),hex,Util.getNetEnv()).enqueue(new Callback<TradeResponse>() {
                 @Override
                 public void onResponse(Call<TradeResponse> call, Response<TradeResponse> response) {
                     data.postValue(response.body());

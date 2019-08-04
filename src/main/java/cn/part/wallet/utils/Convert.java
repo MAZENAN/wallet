@@ -95,4 +95,27 @@ public class Convert {
     public static long BTCToSatoshi(BigDecimal btc) {
         return btc.multiply(BigDecimal.valueOf(100000000)).longValue();
     }
+
+    public static String getTokenTxData(String signature,String address,BigInteger value) {
+        address = address.startsWith("0x") ? address.substring(2) : address;
+        return "0x" + signature + addZeroForNum(address,64) +addZeroForNum(value.toString(16),64);
+    }
+
+    /**
+     * 补0成64位
+     * @return
+     */
+    public static String addZeroForNum(String str,int strLength) {
+        int strLen =str.length();
+        if (strLen <strLength) {
+            while (strLen< strLength) {
+                StringBuffer sb = new StringBuffer();
+                sb.append("0").append(str);
+                str= sb.toString();
+                strLen= str.length();
+            }
+        }
+
+        return str;
+    }
 }

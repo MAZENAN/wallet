@@ -61,7 +61,13 @@ public class TokenAdapter extends RecyclerView.Adapter<TokenAdapter.TokenHolder>
         }
 
         IWalletApi service = Util.getRetrofit(IWalletApi.HOST).create(IWalletApi.class);
-        Call<TokenBalance> balanceCall = service.getBalance(type, token.getAddress(), IWalletApi.NET_TEST);
+        Call<TokenBalance> balanceCall =null;
+        if (token.getToken()) {
+            balanceCall = service.getTokenBalance(type,token.getAddress(),token.getContractaddress());
+        }else {
+            balanceCall = service.getBalance(type, token.getAddress(), Util.getNetEnv());
+        }
+
         balanceCall.enqueue(new Callback<TokenBalance>(){
             @Override
             public void onResponse(Call<TokenBalance> call, Response<TokenBalance> response) {

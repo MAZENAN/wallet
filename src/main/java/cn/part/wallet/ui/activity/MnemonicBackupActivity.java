@@ -9,6 +9,9 @@ import butterknife.OnClick;
 import cn.part.wallet.R;
 import cn.part.wallet.base.BaseActivity;
 import cn.part.wallet.view.MnemonicBackupAlertDialog;
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
+import static cn.pedant.SweetAlert.SweetAlertDialog.BUTTON_CONFIRM;
 
 public class MnemonicBackupActivity extends BaseActivity {
     String walletMnemonic = "";
@@ -30,13 +33,17 @@ public class MnemonicBackupActivity extends BaseActivity {
 
     @Override
     public void initToolBar() {
-        tvTitle.setText("助记词");
+        tvTitle.setText(R.string.title_mnemonic);
     }
 
     @Override
     public void initDatas() {
-        MnemonicBackupAlertDialog mnemonicBackupAlertDialog = new MnemonicBackupAlertDialog(this);
-        mnemonicBackupAlertDialog.show();
+        getpDialog().changeAlertType(SweetAlertDialog.WARNING_TYPE);
+        getpDialog().setContentText(getString(R.string.mnemonic_backup_alert_tips)).setConfirmButton(R.string.mnemonic_backup_alert_btn,(sw)->{dismissDialog();});
+//        getpDialog().getButton(BUTTON_CONFIRM).setBackgroundResource(R.drawable.btn_red);
+        showMyDialog(getString(R.string.mnemonic_backup_dailog_title));
+//        MnemonicBackupAlertDialog mnemonicBackupAlertDialog = new MnemonicBackupAlertDialog(this);
+//        mnemonicBackupAlertDialog.show();
         Intent intent = getIntent();
         walletMnemonic = intent.getStringExtra("walletMnemonic");
         tvMnemonic.setText(walletMnemonic);

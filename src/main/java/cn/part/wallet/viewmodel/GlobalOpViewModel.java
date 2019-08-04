@@ -4,7 +4,6 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
-
 import org.consenlabs.tokencore.foundation.utils.MnemonicUtil;
 import org.consenlabs.tokencore.wallet.Identity;
 import org.consenlabs.tokencore.wallet.Wallet;
@@ -18,9 +17,7 @@ import org.consenlabs.tokencore.wallet.model.ChainType;
 import org.consenlabs.tokencore.wallet.model.Metadata;
 import org.consenlabs.tokencore.wallet.model.MnemonicAndPath;
 import org.consenlabs.tokencore.wallet.model.Network;
-
 import java.util.List;
-
 import cn.part.wallet.utils.LogUtils;
 import cn.part.wallet.utils.MyThreadPool;
 
@@ -28,6 +25,7 @@ public class GlobalOpViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> mLoadingData = new MutableLiveData<>();
     private MutableLiveData<String> mMnemonicData;
     private MutableLiveData<Boolean> mDeleteResultData;
+    private MutableLiveData<Boolean> mRecoveryResultData;
 
     public GlobalOpViewModel(@NonNull Application application) {
         super(application);
@@ -60,8 +58,20 @@ public class GlobalOpViewModel extends AndroidViewModel {
         return mDeleteResultData;
     }
 
+
     public void setDeleteResultData(Boolean bool) {
         getDeleteResultData().postValue(bool);
+    }
+
+    public MutableLiveData<Boolean> getRecoveryResultData() {
+        if (mRecoveryResultData == null) {
+            mRecoveryResultData = new MutableLiveData<>();
+        }
+        return mRecoveryResultData;
+    }
+
+    public void setRecoveryResultData(Boolean bool) {
+        getRecoveryResultData().postValue(bool);
     }
 
     /**
@@ -77,7 +87,6 @@ public class GlobalOpViewModel extends AndroidViewModel {
         });
     }
 
-
     /**
      * 发起删除身份
      * @param pass
@@ -86,6 +95,20 @@ public class GlobalOpViewModel extends AndroidViewModel {
         MyThreadPool.execute(()->{
             setLoadingData(true);
             deleteIdentity(pass);
+        });
+    }
+
+    /**
+     * 发起恢复身份
+     * @param mnemonic
+     * @param identityName
+     * @param identityPwd
+     * @param pwdReminderInfo
+     */
+    public void postRecoveryIdentity(String mnemonic, String identityName,String identityPwd, String pwdReminderInfo) {
+        MyThreadPool.execute(()->{
+            setLoadingData(true);
+            recoveryIdentity(mnemonic, identityName, identityPwd, pwdReminderInfo);
         });
     }
 
@@ -127,7 +150,7 @@ public class GlobalOpViewModel extends AndroidViewModel {
      */
     private void createIdentity(String identityName,String pass,String hint) {
         try {
-            Identity identity = Identity.createIdentity(identityName, pass, hint, Network.TESTNET, Metadata.FROM_NEW_IDENTITY);
+            Identity identity = Identity.createIdentity(identityName, pass, hint, Network.MAINNET, Metadata.FROM_NEW_IDENTITY);
             Wallet ethereumWallet = identity.getWallets().get(0);
             String ethereumId = ethereumWallet.getId();
             MnemonicAndPath ethereumMnemonic = WalletManager.exportMnemonic(ethereumId, pass);
@@ -141,6 +164,16 @@ public class GlobalOpViewModel extends AndroidViewModel {
         mLoadingData.postValue(false);
     }
 
+    public void recoveryIdentity(String mnemonic, String identityName,String identityPwd, String pwdReminderInfo) {
+        try{
+            Identity.recoverIdentity(mnemonic, identityName, identityPwd, pwdReminderInfo, Network.MAINNET, Metadata.FROM_RECOVERED_IDENTITY);
+            setRecoveryResultData(true);
+        }   catch (Exception e) {
+            setRecoveryResultData(false);
+        }
+        setLoadingData(false);
+    }
+
     /**
      * 创建钱包
      * @param walletType 钱包类型
@@ -149,8 +182,6 @@ public class GlobalOpViewModel extends AndroidViewModel {
      * @param hint
      */
     private void createWallet(String walletType,String walletName,String pass,String hint) {
-
-
         Identity identity = Identity.getCurrentIdentity();
         List<String> mnemonics = MnemonicUtil.randomMnemonicCodes();
         Metadata walletMetadata = new Metadata();

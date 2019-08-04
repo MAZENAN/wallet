@@ -34,7 +34,8 @@ public class ReceiptActivity extends BaseActivity {
     ImageView qrImg;
     private Wallet wallet;
     private CopyWalletPopWindow popWindow;
-    private String addr;
+    private String codeAddr;
+    private String copyAddr;
 
     @Override
     protected void onBeforeSetContentLayout() {
@@ -62,17 +63,20 @@ public class ReceiptActivity extends BaseActivity {
     @Override
     public void configViews() {
         tvWalletName.setText(wallet.getMetadata().getName());
-        addr = wallet.getAddress();
+        copyAddr = codeAddr = wallet.getAddress();
         if (wallet.getMetadata().getChainType().equals(ChainType.ETHEREUM)){
-            addr = "0x" + addr;
+            codeAddr = "ethereum:"+"0x" + codeAddr;
+            copyAddr = "0x" + copyAddr;
+        }else if (wallet.getMetadata().getChainType().equals(ChainType.BITCOIN)) {
+            codeAddr = "bitcoin:"+ codeAddr;
         }
-        tvWalletAddr.setText(addr);
+        tvWalletAddr.setText(copyAddr);
         initQrCode();
     }
 
     private void initQrCode() {
         MyThreadPool.execute(()->{
-            Bitmap bitmap = QRCodeEncoder.syncEncodeQRCode(wallet.getAddress(), BGAQRCodeUtil.dp2px(ReceiptActivity.this, 150));
+            Bitmap bitmap = QRCodeEncoder.syncEncodeQRCode(codeAddr, BGAQRCodeUtil.dp2px(ReceiptActivity.this, 150));
             MyThreadPool.runOnUiThread(()->{
                 Glide.with(ReceiptActivity.this).load(bitmap).fitCenter().into(qrImg);
             });
@@ -99,7 +103,7 @@ public class ReceiptActivity extends BaseActivity {
         // 将文本内容放到系统剪贴板里。
         if (cm != null) {
             // 创建普通字符型ClipData
-            ClipData mClipData = ClipData.newPlainText("Label", addr);
+            ClipData mClipData = ClipData.newPlainText("Label", copyAddr);
             // 将ClipData内容放到系统剪贴板里。
             cm.setPrimaryClip(mClipData);
         }

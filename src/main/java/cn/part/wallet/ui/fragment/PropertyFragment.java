@@ -2,7 +2,6 @@ package cn.part.wallet.ui.fragment;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,7 +9,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.gyf.barlibrary.ImmersionBar;
+
+import org.consenlabs.tokencore.wallet.Identity;
 import org.consenlabs.tokencore.wallet.Wallet;
 import org.consenlabs.tokencore.wallet.model.ChainType;
 import java.math.BigDecimal;
@@ -33,7 +33,8 @@ import cn.part.wallet.ui.activity.QRCodeScannerActivity;
 import cn.part.wallet.ui.activity.ReceiptActivity;
 import cn.part.wallet.ui.adapter.SwitchWalletAdapter;
 import cn.part.wallet.ui.adapter.TokenAdapter;
-import cn.part.wallet.utils.LogUtils;
+import cn.part.wallet.utils.Conf;
+import cn.part.wallet.utils.PrefUtils;
 import cn.part.wallet.viewmodel.ProperyViewModel;
 
 public class PropertyFragment extends BaseFragment {
@@ -41,6 +42,8 @@ public class PropertyFragment extends BaseFragment {
     SwipeRefreshLayout refresh;
     @BindView(R.id.tv_title)
     TextView tvTitle;
+    @BindView(R.id.tv_identity_name)
+    TextView tvIdentityName;
     @BindView(R.id.rc_token)
     RecyclerView rcProperty;//资产Token列表
     @BindView(R.id.tv_main_wallet_name)
@@ -97,6 +100,7 @@ public class PropertyFragment extends BaseFragment {
     @Override
     public void configViews() {
         tvTitle.setText(R.string.title_main_wallet);
+        tvIdentityName.setText(Identity.getCurrentIdentity().getMetadata().getName());
         refresh.setProgressBackgroundColorSchemeColor(Color.parseColor("#F5F5F5"));
 
         rcProperty.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
@@ -173,6 +177,10 @@ public class PropertyFragment extends BaseFragment {
         switch(currentWallet.getMetadata().getChainType()) {
             case ChainType.ETHEREUM:
                 list.add(new Token("ETH",new BigDecimal("0"),new BigDecimal("0"),"0x"+currentWallet.getAddress(),"",ChainType.ETHEREUM,false));
+
+                if (PrefUtils.getString(Conf.Net.KEY_NET,Conf.Net.NET_MAIN,mContext).equals(Conf.Net.NET_MAIN)){
+                    list.add(new Token("USDT",new BigDecimal("0"),new BigDecimal("0"),"0x"+currentWallet.getAddress(),"0xdac17f958d2ee523a2206206994597c13d831ec7",ChainType.ETHEREUM,true))   ;
+                }
                 break;
             case ChainType.BITCOIN:
                 list.add(new Token("BTC",new BigDecimal("0"),new BigDecimal("0"),currentWallet.getAddress(),"",ChainType.BITCOIN,false));

@@ -42,5 +42,9 @@ public class SplashActivity extends BaseActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         SplashActivity.this.startActivity(intent);
     }
-    //TODO 屏蔽home按键
+
+    @Override
+    protected Boolean onPressBack() {
+        return true;
+    }
 }

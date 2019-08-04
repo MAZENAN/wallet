@@ -12,6 +12,7 @@ import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import cn.part.wallet.R;
 import cn.part.wallet.base.BaseActivity;
+import cn.part.wallet.utils.ActivityManager;
 import cn.part.wallet.utils.ToastUtil;
 import cn.part.wallet.viewmodel.GlobalOpViewModel;
 
@@ -47,7 +48,7 @@ public class IdentityAddActivity extends BaseActivity {
 
     @Override
     public void initToolBar() {
-        tvTitle.setText("创建身份");
+        tvTitle.setText(R.string.title_create_identity);
     }
 
     @Override
@@ -66,7 +67,7 @@ public class IdentityAddActivity extends BaseActivity {
         pass = getEdtStr(etPass);
         passConfirm = getEdtStr(etPassConfirm);
         passRemind = getEdtStr(etPassPrompt);
-        boolean isEnable = !TextUtils.isEmpty(identityName)&&!TextUtils.isEmpty(pass)&&!TextUtils.isEmpty(passConfirm) ? true : false;
+        boolean isEnable = !TextUtils.isEmpty(identityName) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(passConfirm);
         btnCreateWallet.setEnabled(isEnable);
       }
 
@@ -104,17 +105,18 @@ public class IdentityAddActivity extends BaseActivity {
 
     private void onGetMnemonic(String mnemonic) {
         if (!mnemonic.isEmpty()) {
-            ToastUtil.showToast("创建身份成功");
+                ToastUtil.showToast(R.string.create_identity_success);
                 Intent intent = new Intent(mContext, WalletBackUpActivity.class);
                 intent.putExtra("EthereumMnemonic", mnemonic);
+                ActivityManager.getInstance().finishAllActivity();
                 startActivity(intent);
         }else {
-            ToastUtil.showToast("创建身份失败");
+            ToastUtil.showToast(R.string.create_identity_fail);
         }
     }
 
     private void onLoading(Boolean bool) {
-        switchDialog(bool,"正在创建身份...");
+        switchDialog(bool,getString(R.string.doing_create_identity));
     }
 
     private String getEdtStr(EditText editText){

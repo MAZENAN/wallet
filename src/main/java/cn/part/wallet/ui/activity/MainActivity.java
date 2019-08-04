@@ -1,19 +1,14 @@
 package cn.part.wallet.ui.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
-
-
 import butterknife.BindView;
 import cn.part.wallet.R;
 import cn.part.wallet.base.BaseActivity;
@@ -22,7 +17,6 @@ import cn.part.wallet.ui.fragment.MineFragment;
 import cn.part.wallet.ui.fragment.PropertyFragment;
 import cn.part.wallet.utils.ToastUtil;
 import cn.part.wallet.view.NoScrollViewPager;
-
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -34,7 +28,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     TextView tvMall;
     @BindView(R.id.lly_mall)
     LinearLayout llyMall;
-
     @BindView(R.id.iv_mine)
     ImageView ivMine;
     @BindView(R.id.tv_mine)
@@ -42,7 +35,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.lly_mine)
     LinearLayout llyMine;
 
-    private HomePagerAdapter homePagerAdapter;
 
     @Override
     public int getLayoutId() {
@@ -69,11 +61,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         vpHome.setOffscreenPageLimit(2);
         List<Fragment> fragmentList = new ArrayList<>();
-       fragmentList.add(new PropertyFragment());
-       fragmentList.add(new MineFragment());
-       homePagerAdapter = new HomePagerAdapter(getSupportFragmentManager(), fragmentList);
-       vpHome.setAdapter(homePagerAdapter);
-       vpHome.setCurrentItem(0, false);
+        fragmentList.add(new PropertyFragment());
+        fragmentList.add(new MineFragment());
+        HomePagerAdapter homePagerAdapter = new HomePagerAdapter(getSupportFragmentManager(), fragmentList);
+        vpHome.setAdapter(homePagerAdapter);
+        vpHome.setCurrentItem(0, false);
     }
 
     // 退出时间
@@ -103,12 +95,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         setAllUnselected();
         switch (v.getId()) {
-            case R.id.lly_mall:// 商场
+            case R.id.lly_mall:
                 ivMall.setSelected(true);
                 tvMall.setSelected(true);
                 vpHome.setCurrentItem(0, false);
                 break;
-            case R.id.lly_mine:// 我的
+            case R.id.lly_mine:
                 ivMine.setSelected(true);
                 tvMine.setSelected(true);
                 vpHome.setCurrentItem(1, false);
@@ -137,6 +129,4 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onDestroy() {
         super.onDestroy();
     }
-
-
 }

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 import org.consenlabs.tokencore.wallet.Identity;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.part.wallet.R;
@@ -13,6 +12,7 @@ import cn.part.wallet.base.BaseFragment;
 import cn.part.wallet.ui.activity.AddressListActivity;
 import cn.part.wallet.ui.activity.GuideActivity;
 import cn.part.wallet.ui.activity.IdentityActivity;
+import cn.part.wallet.ui.activity.SettingActivity;
 import cn.part.wallet.ui.activity.WalletListActivity;
 import cn.part.wallet.utils.ToastUtil;
 import cn.part.wallet.view.PwdInputAlertDialog;
@@ -21,6 +21,8 @@ import cn.part.wallet.viewmodel.GlobalOpViewModel;
 public class MineFragment extends BaseFragment {
     @BindView(R.id.tv_identity_name)
     TextView tvIdentityName;
+    @BindView(R.id.tv_identity_id)
+    TextView tvIdentityId;
     GlobalOpViewModel mViewModel;
 
     @Override
@@ -55,9 +57,10 @@ public class MineFragment extends BaseFragment {
     @Override
     public void configViews() {
         tvIdentityName.setText(Identity.getCurrentIdentity().getMetadata().getName());
+        tvIdentityId.setText(Identity.getCurrentIdentity().getIdentifier());
     }
 
-    @OnClick({R.id.tv_identity_name,R.id.rl_wallet_manage,R.id.rl_address_manage,R.id.tv_quit_identity})
+    @OnClick({R.id.tv_identity_name,R.id.rl_wallet_manage,R.id.rl_address_manage,R.id.tv_quit_identity,R.id.rl_setting})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_identity_name:
@@ -67,7 +70,10 @@ public class MineFragment extends BaseFragment {
                 launchActivity(WalletListActivity.class);
                 break;
             case R.id.rl_address_manage:
-               // launchActivity(AddressListActivity.class);
+                launchActivity(AddressListActivity.class);
+                break;
+            case R.id.rl_setting:
+                launchActivity(SettingActivity.class);
                 break;
             case R.id.tv_quit_identity:
                 showPwdInputDialog();

@@ -81,7 +81,6 @@ public class Token implements Parcelable {
     public Boolean getToken() {
         return isToken;
     }
-
     @Override
     public int describeContents() {
         return 0;

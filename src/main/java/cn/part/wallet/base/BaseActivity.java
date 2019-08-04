@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -13,6 +14,7 @@ import com.gyf.barlibrary.ImmersionBar;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.part.wallet.R;
+import cn.part.wallet.utils.ActivityManager;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -26,6 +28,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityManager.getInstance().addActivity(this);
         onBeforeSetContentLayout();
         setContentView(getLayoutId());
         mContext = this;
@@ -70,6 +73,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         unbinder.unbind();
         ImmersionBar.with(this).destroy(); //必须调用该方法，防止内存泄漏
         dismissDialog();
+        ActivityManager.getInstance().removeActivity(this);
     }
 
     public abstract int getLayoutId();
@@ -133,7 +137,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         return pDialog;
     }
 
-    public void showDialog(String title) {
+    public void showMyDialog(String title) {
         if (!title.isEmpty()){
             getpDialog().setTitleText(title);
             getpDialog().show();
@@ -149,9 +153,25 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void switchDialog(Boolean bool,String tips) {
         if (bool) {
-            showDialog(tips);
-        }else {
+            showMyDialog(tips);
+        } else {
             dismissDialog();
         }
+    }
+
+    //屏蔽返回键
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                if (onPressBack())
+                    return true;
+                break;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    protected Boolean onPressBack() {
+        return false;
     }
 }

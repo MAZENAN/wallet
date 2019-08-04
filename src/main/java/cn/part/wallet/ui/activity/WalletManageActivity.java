@@ -3,12 +3,12 @@ package cn.part.wallet.ui.activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import org.consenlabs.tokencore.wallet.Wallet;
 import org.consenlabs.tokencore.wallet.WalletManager;
 import org.consenlabs.tokencore.wallet.model.ChainType;
-
+import org.consenlabs.tokencore.wallet.model.TokenException;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.part.wallet.R;
@@ -17,12 +17,12 @@ import cn.part.wallet.utils.LogUtils;
 import cn.part.wallet.utils.ToastUtil;
 
 public class WalletManageActivity extends BaseActivity {
-    @BindView(R.id.ll_export_mnemonic)
-    LinearLayout ll_export_mnemonic;
-    @BindView(R.id.ll_export_keystore)
-    LinearLayout ll_export_keystore;
-    @BindView(R.id.ll_export_privateKey)
-    LinearLayout ll_export_privateKey;
+    @BindView(R.id.rl_export_mnemonic)
+    RelativeLayout rl_export_mnemonic;
+    @BindView(R.id.rl_export_keystore)
+    RelativeLayout rl_export_keystore;
+    @BindView(R.id.rl_export_privateKey)
+    RelativeLayout rl_export_privateKey;
     @BindView(R.id.tv_title)
     TextView tvTitle;
 
@@ -54,15 +54,15 @@ public class WalletManageActivity extends BaseActivity {
     public void configViews() {
         String chainType = mWallet.getMetadata().getChainType();
         if (chainType.equals(ChainType.EOS)||chainType.equals(ChainType.BITCOIN)) {
-            ll_export_keystore.setVisibility(View.GONE);
-            ll_export_privateKey.setVisibility(View.GONE);
+            rl_export_keystore.setVisibility(View.GONE);
+            rl_export_privateKey.setVisibility(View.GONE);
         }
     }
 
-    @OnClick({R.id.ll_export_mnemonic,R.id.ll_export_keystore,R.id.ll_export_privateKey})
+    @OnClick({R.id.rl_export_mnemonic,R.id.rl_export_keystore,R.id.rl_export_privateKey})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.ll_export_mnemonic:
+            case R.id.rl_export_mnemonic:
                 try{
                     LogUtils.e(TAG,"钱包id"+mWalletId);
                     String mnemonic = WalletManager.exportMnemonic(mWalletId, "123456").getMnemonic();
@@ -72,12 +72,12 @@ public class WalletManageActivity extends BaseActivity {
                 }
 
                 break;
-            case R.id.ll_export_privateKey:
-                String s = WalletManager.exportPrivateKey(mWalletId, "123456");
+            case R.id.rl_export_privateKey:
+                String s = WalletManager.exportPrivateKey(mWalletId, "Wang09161993");
                 LogUtils.i(TAG,s);
                 ToastUtil.showToast(s);
                 break;
-            case R.id.ll_export_keystore:
+            case R.id.rl_export_keystore:
                 try{
                     String s1 = WalletManager.exportKeystore(mWalletId, "123456");
                     ToastUtil.showToast(s1);

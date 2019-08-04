@@ -12,7 +12,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface IWalletApi {
-    public static final String HOST = "http://test.part.cn";
+    public static final String HOST = "http://wallet.part.cn";
     public static final String NET_DOGE = "DOGE";
     public static final String NET_TEST = "test";
 
@@ -20,6 +20,10 @@ public interface IWalletApi {
     // /app_api/v1/get_balance.php?type=ETH&address=0xf925CBFF181Eb7c82d5B34401e512d3781461863&network=test
     @GET("/app_api/v1/get_balance.php")
     Call<TokenBalance> getBalance(@Query("type") String type, @Query("address") String address, @Query("network") String network);
+
+    //获取代币余额
+    @GET("/app_api/v1/get_balance.php")
+    Call<TokenBalance> getTokenBalance(@Query("type") String type, @Query("address") String address, @Query("token") String token);
 
     //获取gas获取nonce
     // http://test.part.cn/app_api/v1/get_fee.php?type=ETH&address=0xf925CBFF181Eb7c82d5B34401e512d3781461863

@@ -49,18 +49,18 @@ public class BTCTransferActivity extends BaseActivity {
     EditText etAmount;
     @BindView(R.id.seekbar)
     SeekBar seekbar;
-    @BindView(R.id.tv_gas_cost)
-    TextView tvGasCost;
-    @BindView(R.id.gas_price)
-    TextView tvGasPrice;
-    @BindView(R.id.lly_gas)
-    LinearLayout llyGas;
+    @BindView(R.id.tv_fee_cost)
+    TextView tvFeeCost;
+    @BindView(R.id.sat_price)
+    TextView tvSatPrice;
+    @BindView(R.id.lly_sat)
+    LinearLayout llySat;
     @BindView(R.id.lly_advance_param)
     LinearLayout llyAdvanceParam;
     @BindView(R.id.advanced_switch)
     Switch advancedSwitch;
-    @BindView(R.id.custom_gas_price)
-    EditText customGasPrice;
+    @BindView(R.id.custom_sat_price)
+    EditText customSatPrice;
 
     private String walletAddr;
     private String contractAddress;
@@ -68,14 +68,10 @@ public class BTCTransferActivity extends BaseActivity {
     private String symbol;
     private String netCost;
 
-
-
-
     private Boolean isCustomGas = false;
     private BigDecimal amountPrice;
     private BigInteger nonce = new BigInteger("-1"); //nonce 默认值
     private BigDecimal gasLow = new BigDecimal("1.00"); //gas最低值 默认值gwei
-//    private BigDecimal gasFast = new BigDecimal("20");
     private BigDecimal gasFastest = new BigDecimal("20.00");//gas最高值默认值 gwei
     private BigInteger gasLimit = new BigInteger("21000");//gaslimit 默认值
     private BigDecimal gasPrice = gasLow;//gas price 默认值
@@ -97,7 +93,7 @@ public class BTCTransferActivity extends BaseActivity {
 
     @Override
     public void initToolBar() {
-        ivBtn.setImageResource(R.drawable.ic_transfer_scanner);
+        ivBtn.setImageResource(R.drawable.ic_scan);
         rlBtn.setVisibility(View.VISIBLE);
     }
 
@@ -175,7 +171,7 @@ public class BTCTransferActivity extends BaseActivity {
             }
         });
 
-        customGasPrice.addTextChangedListener(new TextWatcher() {
+        customSatPrice.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -204,7 +200,7 @@ public class BTCTransferActivity extends BaseActivity {
     private void switchCustom(Boolean isChecked) {
         isCustomGas = isChecked;
         llyAdvanceParam.setVisibility(isChecked ? View.VISIBLE : View.GONE);
-        llyGas.setVisibility(isChecked ? View.GONE : View.VISIBLE);
+        llySat.setVisibility(isChecked ? View.GONE : View.VISIBLE);
         LogUtils.i(TAG,isCustomGas);
     }
 
@@ -301,8 +297,8 @@ public class BTCTransferActivity extends BaseActivity {
      */
     private void updateView() {
         amountPrice = Convert.calGas(currentGasPrice,new BigDecimal(gasLimit));
-        tvGasCost.setText(amountPrice.toString()+ " btc");
-        tvGasPrice.setText(currentGasPrice.toString() + " sat/b");
+        tvFeeCost.setText(amountPrice.toString()+ " btc");
+        tvSatPrice.setText(currentGasPrice.toString() + " sat/b");
     }
 }
 

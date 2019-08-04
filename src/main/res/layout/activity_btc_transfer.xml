@@ -113,7 +113,7 @@
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/tv_gas_cost"
+                        android:id="@+id/tv_fee_cost"
                         android:layout_marginLeft="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -125,7 +125,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/lly_gas"
+                    android:id="@+id/lly_sat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="21dp"
@@ -154,7 +154,7 @@
                             android:textColor="#FF999999"
                             android:textSize="@dimen/sp_14" />
                         <TextView
-                            android:id="@+id/gas_price"
+                            android:id="@+id/sat_price"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
@@ -189,7 +189,7 @@
                     android:orientation="horizontal"
                     android:layout_height="wrap_content">
                     <EditText
-                        android:id="@+id/custom_gas_price"
+                        android:id="@+id/custom_sat_price"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/discovery_application_item_name_color"
@@ -202,10 +202,10 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:textColor="@color/property_ico_worth_color"
-                        android:text="gwei"
                         android:textSize="12sp" />
 
                 </LinearLayout>
+
 
             </LinearLayout>
 

@@ -20,6 +20,7 @@ import cn.part.wallet.base.BaseActivity;
 import cn.part.wallet.domain.VerifyMnemonicWordTag;
 import cn.part.wallet.ui.adapter.VerifyBackupMnemonicWordsAdapter;
 import cn.part.wallet.ui.adapter.VerifyBackupSelectedMnemonicWordsAdapter;
+import cn.part.wallet.utils.Conf;
 import cn.part.wallet.utils.LogUtils;
 import cn.part.wallet.utils.ToastUtil;
 
@@ -106,6 +107,7 @@ public class VerifyMnemonicBackupActivity extends BaseActivity {
 
                 List<VerifyMnemonicWordTag> datas = verifyBackupMenmonicWordsAdapter.getData();
                 for (int i = 0; i < datas.size(); i++) {
+                    LogUtils.e(TAG,"i>>>>>>:"+i);
                     if (TextUtils.equals(datas.get(i).getMnemonicWord(), verifyBackupSelectedMnemonicWordsAdapter.getData().get(position))) {
                         verifyBackupMenmonicWordsAdapter.setUnselected(i);
                         break;
@@ -122,7 +124,6 @@ public class VerifyMnemonicBackupActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_confirm:
-                LogUtils.d("VerifyMnemonicBackUp", "Click!!");
                 List<String> data = verifyBackupSelectedMnemonicWordsAdapter.getData();
                 int size = data.size();
                 if (size == 12) {
@@ -139,17 +140,13 @@ public class VerifyMnemonicBackupActivity extends BaseActivity {
                     LogUtils.d("VerifyMnemonicBackUp", "trim:" + trim);
                     if (TextUtils.equals(trim, walletMnemonic)) {
                         // TODO 修改该钱包备份标识
-                        SharedPreferences.Editor editor = getSharedPreferences("ids", MODE_PRIVATE).edit();
+                        SharedPreferences.Editor editor = getSharedPreferences(Conf.SETTING_SP_NAME, MODE_PRIVATE).edit();
                         editor.putString("is_backup", "true");
-                        editor.commit();
-//                        AppManager.getAppManager().finishActivity(MnemonicBackupActivity.class);
+                        editor.apply();
                         setResult(VERIFY_SUCCESS_RESULT, new Intent());
-                        finish();
-
                         Intent intent =  new Intent(mContext,MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
-                       // launchActivity(MainActivity.class);
                     } else {
                         ToastUtil.showToast(R.string.verify_backup_failed);
                     }

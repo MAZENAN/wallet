@@ -1,33 +1,33 @@
 package cn.part.wallet.ui.activity;
 
+import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import org.consenlabs.tokencore.wallet.Identity;
 import org.consenlabs.tokencore.wallet.Wallet;
-import org.consenlabs.tokencore.wallet.WalletManager;
 import org.consenlabs.tokencore.wallet.model.Metadata;
-import org.consenlabs.tokencore.wallet.model.MnemonicAndPath;
 import org.consenlabs.tokencore.wallet.model.Network;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import cn.part.wallet.R;
 import cn.part.wallet.base.BaseActivity;
-import cn.part.wallet.ui.fragment.MineFragment;
-import cn.part.wallet.utils.LogUtils;
 import cn.part.wallet.utils.ToastUtil;
+import cn.part.wallet.viewmodel.GlobalOpViewModel;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class IdentityRecoveryActivity extends BaseActivity {
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.et_mnemonic_name)
     EditText etMnemonic;
+    @BindView(R.id.et_identity_name)
+    EditText etIdentityName;
     @BindView(R.id.et_identity_pwd)
     EditText etPwd;
     @BindView(R.id.et_identity_pwd_confirm)
@@ -35,12 +35,14 @@ public class IdentityRecoveryActivity extends BaseActivity {
     @BindView(R.id.et_identity_pwd_reminder_info)
     EditText etPwdReminder;
     @BindView(R.id.btn_recovery_identity)
-    TextView btnRecovery;
+    Button btnRecovery;
 
     private String mnemonic = "";
+    private String identityName = "";
     private String identityPwd = "";
     private String pwdConfirm = "";
     private String pwdReminderInfo = "";
+    private GlobalOpViewModel mViewModel;
     @Override
     protected void onBeforeSetContentLayout() {
 
@@ -53,26 +55,43 @@ public class IdentityRecoveryActivity extends BaseActivity {
 
     @Override
     public void initToolBar() {
-        tvTitle.setText("恢复身份");
+        tvTitle.setText(getString(R.string.title_identity_recovery));
     }
 
     @Override
     public void initDatas() {
+        mViewModel = ViewModelProviders.of(this).get(GlobalOpViewModel.class);
+        mViewModel.getLoadingData().observe(this,this::onLoadind);
+        mViewModel.getRecoveryResultData().observe(this,this::onRecoveryIdentity);
+    }
+
+    private void onRecoveryIdentity(Boolean bool) {
+        if (bool) {
+            Intent intent =  new Intent(mContext,MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }else {
+//           getpDialog().changeAlertType(SweetAlertDialog.ERROR_TYPE);
+//           showMyDialog(getString(R.string.identity_recovery_fail));
+            ToastUtil.showToast(R.string.identity_recovery_fail);
+        }
+    }
+
+    private void onLoadind(Boolean bool) {
+        switchDialog(bool,getString(R.string.alert_recovery_identity));
     }
 
     @Override
-    public void configViews() {
+    public void configViews() {}
 
-    }
-
-    @OnTextChanged({R.id.et_mnemonic_name,R.id.et_identity_pwd,R.id.et_identity_pwd_confirm,R.id.et_identity_pwd_reminder_info})
+    @OnTextChanged({R.id.et_mnemonic_name,R.id.et_identity_pwd,R.id.et_identity_pwd_confirm,R.id.et_identity_pwd_reminder_info,R.id.et_identity_name})
     public void onTextChange(CharSequence text) {
         mnemonic = getEdtStr(etMnemonic);
+        identityName = getEdtStr(etIdentityName);
         identityPwd = getEdtStr(etPwd);
         pwdConfirm = getEdtStr(etPwdConfirm);
         pwdReminderInfo = getEdtStr(etPwdReminder);
-
-        boolean isEnable = !TextUtils.isEmpty(mnemonic)&&!TextUtils.isEmpty(identityPwd)&&!TextUtils.isEmpty(pwdConfirm) ? true : false;
+        boolean isEnable = !TextUtils.isEmpty(mnemonic) && !TextUtils.isEmpty(identityName) &&  !TextUtils.isEmpty(identityPwd) && !TextUtils.isEmpty(pwdConfirm);
         btnRecovery.setEnabled(isEnable);
     }
 
@@ -86,16 +105,7 @@ public class IdentityRecoveryActivity extends BaseActivity {
             case R.id.btn_recovery_identity:
                 boolean b = checkInput();
                 if (b) {
-                    try{
-                        Identity identity = Identity.recoverIdentity(mnemonic, "xyz", identityPwd, pwdReminderInfo, Network.MAINNET, Metadata.P2WPKH);
-                        Wallet ethereumWallet = identity.getWallets().get(0);
-                        String ethereumId = ethereumWallet.getId();
-                        SharedPreferences.Editor editor = getSharedPreferences("default_wallet", MODE_PRIVATE).edit();
-                        editor.putString("current_wallet_id", ethereumId);
-                        launchActivity(MainActivity.class);
-                    }catch (Exception e){
-                        ToastUtil.showToast("恢复身份失败");
-                    }
+                   mViewModel.postRecoveryIdentity(mnemonic,identityName,identityPwd,pwdReminderInfo);
                 }
                 break;
         }

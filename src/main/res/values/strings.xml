@@ -9,6 +9,14 @@
     <string name="btn_guide_recovery">恢复身份</string>
     <string name="create_identity_name_input_tips">请输入身份名称</string>
 
+    <string name="title_create_identity">创建身份</string>
+    <string name="doing_create_identity">正在创建身份…</string>
+    <string name="create_identity_success">创建身份成功</string>
+    <string name="create_identity_fail">创建身份失败</string>
+
+    <string name="title_backup">备份提示</string>
+    <string name="title_mnemonic">助记词</string>
+
     <string name="create_wallet_alert1">* 密码用于隐私保护和交易授权，强度非常重要</string>
     <string name="create_wallet_alert2">* 钱包不存储密码秘钥，也无法帮您找回，请务必牢记</string>
     <string name="create_wallet_name_hint">钱包名称</string>
@@ -18,9 +26,10 @@
     <string name="wallet_manager_load_wallet">导入钱包</string>
     <string name="create_wallet_agreement_reminder">我已经仔细阅读并同意</string>
     <string name="create_wallet_agreement">服务及隐私条款</string>
-
+    <string name="recovery_identity_name_hint">新身份名</string>
     <string name="create_wallet_name_repeat_tips">钱包名称重复</string>
     <string name="create_wallet_name_input_tips">请输入钱包名称</string>
+    <string name="alert_recovery_identity">正在恢复身份…</string>
 
     <string name="create_wallet_pwd_input_tips">密码不能为空</string>
     <string name="create_wallet_pwdconfirm_input_tips">确认密码不能为空</string>
@@ -38,20 +47,20 @@
     <string name="mnemonic_backup_title">备份助记词</string>
     <string name="mnemonic_backup_tips1">抄写下你的钱包助记词</string>
     <string name="mnemonic_backup_tips2">助记词用于回复钱包或重置钱包密码，降它准确的抄写到纸上，并存放在只有你知道的安全的地方。</string>
-
-
-
-    <string name="mnemonic_backup_alert_tips">如果有人获取你的助记词将直接获取你的资产！请抄写下助记词并存放在安全的地方。</string>
+    <string name="mnemonic_backup_alert_tips">如有人获取你的助记词将直接获取你的资产！请抄下助记词并存放在安全的地方</string>
+    <string name="mnemonic_backup_dailog_title">请勿截图</string>
     <string name="mnemonic_backup_alert_btn">知道了</string>
     <string name="mnemonic_backup_alert_title">请勿截图</string>
 
     <string name="verify_backup_tip1">确认你的钱包助记词</string>
     <string name="verify_backup_tip2">请按顺序点击助记词，以确认你的备份助记词正确。</string>
     <string name="verify_backup_failed">备份失败，请检查你的助记词</string>
-
     <string name="input_pwd_dialog_tip">请输入密码</string>
     <string name="input_pwd_delete_tip">请慎重，此操作无法撤销</string>
     <string name="input_pwd_dialog_confirm">确认</string>
+
+    <string name="title_identity_recovery">恢复身份</string>
+    <string name="identity_recovery_fail">恢复身份失败</string>
 
     <string name="homepage_tab_text_mall">钱包</string>
     <string name="homepage_tab_text_mine">我的</string>
@@ -110,7 +119,7 @@
     <string name="received">转入</string>
     <string name="btn_confirm">确认</string>
 
-    <string name="recovery_identity_alert">使用助记词导入的同时可以修改钱包密码</string>
+    <string name="recovery_identity_alert">*使用助记词导入的同时可以修改钱包密码</string>
     <string name="btn_recovery_identity">恢复身份</string>
     <string name="et_mnemonic_hint">输入助记词用空格分隔</string>
     <string name="recovery_mnemonic_input_tips">助记词不能为空</string>
@@ -168,6 +177,7 @@
     <string name="mine_identity_id">身份名ID</string>
     <string name="mine_into_wallet">钱包管理</string>
     <string name="mine_into_setting">使用设置</string>
+    <string name="mine_into_address">地址管理</string>
     <string name="mine_into_help">帮助与反馈</string>
     <string name="mine_into_protocol">用户协议</string>
     <string name="mine_into_about">关于我们</string>
@@ -178,4 +188,11 @@
     <string name="dialog_cancle">取消</string>
     <string name="dialog_ok">确定</string>
     <string name="dialog_input_hint">请输入您的密码</string>
+
+    <string name="setting_net">节点设置</string>
+    <string name="setting_coin">货币设置</string>
+    <string name="setting_net_test">测试节点</string>
+    <string name="setting_net_main">正式节点</string>
+
+    <string name="btn_save">保存</string>
 </resources>
